@@ -25,17 +25,11 @@ namespace ATM.Models
     {
         public ApplicationDbContext()
             : base("ATMdb", throwIfV1Schema: false)
-        {
-        }
-
-        public DbSet<BankAccount> BankAccounts { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
+        {}
 
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
-
-      
     }
 }
