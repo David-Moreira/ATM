@@ -1,0 +1,16 @@
+﻿@{
+    // Layout = "";
+    ViewBag.Title = "Home";
+}
+
+@if (!Request.IsAuthenticated)
+{
+    @Html.Partial("_LoginPartial")
+}
+else
+{
+    @Html.ActionLink("Go to Operations", "Index","Operations")
+
+}
+
+  

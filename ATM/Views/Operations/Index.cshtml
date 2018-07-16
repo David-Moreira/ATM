@@ -1,0 +1,52 @@
+﻿@using ATM.Models
+@model userBankAccountsViewModel
+@{ViewBag.Title = "Operations";}
+
+<div class="operations-content">
+
+
+    <div class="row">
+        <div class="col-md-6">
+            @Html.ActionLink("Withdraw", "Withdraw", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
+
+        </div>
+
+        <div class="col-md-6">
+
+            @Html.ActionLink("Deposit", "Deposit", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
+
+        </div>
+    </div>
+
+    <div class="row">
+
+
+        <div class="col-md-6">
+
+            @Html.ActionLink("Payment", "Payment", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
+
+        </div>
+
+        <div class="col-md-6">
+            @Html.ActionLink("Transfer funds", "TransferFunds", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            @Html.ActionLink("Quick cash | 10€", "QuickCash", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
+
+        </div>
+
+        <div class="col-md-6">
+
+            @Html.ActionLink("Print Statement", "PrintStatement", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
+
+        </div>
+
+    </div>
+
+
+</div>

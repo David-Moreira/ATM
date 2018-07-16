@@ -1,0 +1,138 @@
+﻿input {
+    color:black;
+}
+
+.dropdown-style {
+    margin: 0 auto;
+    text-align:center;
+    color:black;
+    font-size:16px;
+}
+
+.operations-content {
+    margin-top: 100px;
+
+}
+
+.operations-content .row {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.operations-content .col-md-6 {
+margin-bottom: 5px;
+
+
+}
+
+.operations-content .col-md-6 a {
+    color:darkblue;
+    font-weight:bold;
+    font-size:16px;
+        padding:10px;
+}
+
+    .operations-content .col-md-6 a:hover {
+    color:beige;
+    background-color:darkblue;
+    border-color:white;
+    
+    }
+.logItem{
+    font-family: 'Roboto Mono', monospace;
+        font-size:25px;
+        text-align:center;
+        font-weight:bold;
+}
+
+.logItem a {
+    color:darkblue;
+}
+.divItem {
+    background-color:beige;
+    border: 2px solid;
+    border-color:green;
+    padding: 2px;
+    border-radius:50px;
+    margin-top:10px;
+
+}
+
+.divTitle {
+
+    background-color:beige;
+    border: 2px solid;
+    border-color:green;
+    padding: 2px;
+    border-radius:50px;
+    margin-top:10px;
+}
+
+h1 {
+ font-family: 'Roboto Mono', monospace;
+        font-size: 40px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align:center;
+    color:darkblue;
+}
+
+.atm-content {
+
+    
+    background-color:lightslategray;
+    height:97vh;
+        border-right: solid 1px black;
+                border-left: solid 1px black;
+              
+}
+
+.footer {
+    position:fixed;
+    bottom:0;
+          width:100%;
+    border-top: solid 1px black;
+    background-color:darkblue;
+    font-size: 14px;
+    font-weight:bold;
+    text-align:center;
+    color:white;
+     margin: 0 auto;
+    padding:5px;
+    overflow:hidden;
+    height:30px;
+
+}
+
+
+/* Site.css defaults */
+body {
+    font-family:monospace;
+background-color:white;
+  padding-bottom:30px;
+  color:white;
+
+}
+body a {
+    color:beige;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
