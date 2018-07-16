@@ -17,4 +17,4 @@ I will build on this and add some new functionalities, a transaction history and
 ## 17/07/2018
 
 Made some nice architectural changes. Separation of concerns // Dependency Injection with Ninject.
-Will update design, overall feel and improve the business logic next.
+Will update design, overall feel and improve the business logic next. 
