@@ -9,22 +9,22 @@ namespace ATM.Core.Interfaces.Services
     public interface IOperationService
     {
 
-        void Withdraw(int amount);
+        void Withdraw(int accountNumber, int amount);
 
 
-        void Deposit(int amount);
+        void Deposit(int accountNumber, int amount);
 
 
-        void Payment(int recipientAccountNumber, int amount);
+        void Payment(int accountNumber, int recipientAccountNumber, int amount);
 
 
-        void TransferFunds(int accountNumber, int amount);
+        void TransferFunds(int accountNumber, int recipientAccountNumber, int amount);
 
 
-        void QuickCash();
+        void QuickCash(int accountNumber);
 
 
-        string PrintStatement();
+        string PrintStatement(int accountNumber);
        
     }
 }

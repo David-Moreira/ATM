@@ -12,7 +12,7 @@ namespace ATM.Infrastructure.Entities
         [Key]
         [Display(Name = "Account #")]
         [Required]
-        [RegularExpression(@"\d{6,10}", ErrorMessage = "Account # must be between 6 and 10 numbers.")]
+        //[RegularExpression(@"\d{6,10}", ErrorMessage = "Account # must be between 6 and 10 numbers.")]
         public string AccountNumber { get; set; }
 
 

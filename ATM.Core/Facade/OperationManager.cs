@@ -19,32 +19,36 @@ namespace ATM.Core.Facade
         private BankAccount _bankAccount;
         private Transaction _transaction;
 
-        public OperationManager(int accountNumber, IBankAccountService bankManager, ITransactionService transactionManager)
+        public OperationManager(IBankAccountService bankManager, ITransactionService transactionManager)
         {
             _bankManager = bankManager;
             _transactionManager = transactionManager;
-            _bankAccount = _bankManager.GetById(accountNumber);
             _transaction = new Transaction();
-            _transaction.AccountNumber = accountNumber;
         }
         
         //Have to rethink this with transactions
-        public void Deposit(int amount)
+        public void Deposit(int accountNumber, int amount)
         {
+            _bankAccount = _bankManager.GetById(accountNumber);
             _bankAccount.Balance += amount;
+            _transaction.AccountNumber = accountNumber;
+
             _transaction.Amount = $"+ {amount}";
             _transaction.Recipient = _bankAccount.AccountNumber;
             _bankManager.Update(_bankAccount);
-            _transactionManager.Update(_transaction);
+            _transactionManager.Add(_transaction);
         }
 
-        public void Payment(int recipientAccountNumber, int amount)
+        public void Payment(int accountNumber, int recipientAccountNumber, int amount)
         {
+            _bankAccount = _bankManager.GetById(accountNumber);
             var recipientAcc = _bankManager.GetById(recipientAccountNumber);
 
             if (_bankAccount.Balance - amount > 0)
             {
                 _bankAccount.Balance -= amount;
+                _transaction.AccountNumber = accountNumber;
+
                 _transaction.Amount = "-" + amount.ToString();
                 _transaction.Recipient = _bankAccount.AccountNumber;
 
@@ -68,16 +72,20 @@ namespace ATM.Core.Facade
             };
         }
 
-        public string PrintStatement()
+        public string PrintStatement(int accountNumber)
         {
+            _bankAccount = _bankManager.GetById(accountNumber);
             return string.Format("Conta: {0} \nFull Name: {1}\nBalance: {2}", _bankAccount.AccountNumber, _bankAccount.FullName, _bankAccount.Balance);
         }
 
-        public void QuickCash()
+        public void QuickCash(int accountNumber)
         {
+            _bankAccount = _bankManager.GetById(accountNumber);
             if (_bankAccount.Balance - 10 > 0)
             {
                 _bankAccount.Balance -= 10;
+                _transaction.AccountNumber = accountNumber;
+
                 _transaction.Amount = "-10";
                 _transaction.Recipient = _bankAccount.AccountNumber;
 
@@ -90,14 +98,17 @@ namespace ATM.Core.Facade
             };
         }
 
-        public void TransferFunds(int accountNumber, int amount)
+        public void TransferFunds(int accountNumber, int recipientAccountNumber, int amount)
         {
-            var recipientAcc = _bankManager.GetById(accountNumber);
+            _bankAccount = _bankManager.GetById(accountNumber);
+            var recipientAcc = _bankManager.GetById(recipientAccountNumber);
 
             if (_bankAccount.Balance - amount > 0)
             {
                 _bankAccount.Balance -= amount;
                 recipientAcc.Balance += amount;
+                _transaction.AccountNumber = recipientAccountNumber;
+
                 _transaction.Amount = "-" + amount.ToString();
                 _transaction.Recipient = _bankAccount.AccountNumber;
 
@@ -118,12 +129,15 @@ namespace ATM.Core.Facade
             };
         }
 
-
-        public void Withdraw(int amount)
+        public void Withdraw(int accountNumber, int amount)
         {
+            _bankAccount = _bankManager.GetById(accountNumber);
             if (_bankAccount.Balance - amount > 0)
             {
+
                 _bankAccount.Balance -= amount;
+                _transaction.AccountNumber = accountNumber;
+
                 _transaction.Amount = "-" + amount.ToString();
                 _transaction.Recipient = _bankAccount.AccountNumber;
 
@@ -135,8 +149,6 @@ namespace ATM.Core.Facade
                 throw new InvalidOperationException("Insufficient funds");
             };
         }
-
-
 
     }
 }

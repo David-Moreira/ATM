@@ -22,12 +22,12 @@ namespace ATM.Controllers
         {
             string userID = User.Identity.GetUserId();
             
-            ViewBag.accountNumber = _bankManager.GetByUserId(userID).AccountNumber;
+            Session["AccountNumber"] = _bankManager.GetByUserId(userID).AccountNumber;
             return View();
         }
 
         [HttpGet]
-        public ActionResult Withdraw(int accountNumber)
+        public ActionResult Withdraw()
         {
             return View();
         }
@@ -37,7 +37,7 @@ namespace ATM.Controllers
         {
             if (ModelState.IsValid)
             {
-                _operationsManager.Withdraw(transactionModel.Amount);
+                _operationsManager.Withdraw((int)Session["AccountNumber"], transactionModel.Amount);
                 return View("Index");
             }
             return View();
@@ -53,7 +53,7 @@ namespace ATM.Controllers
         {
             if (ModelState.IsValid)
             {
-                _operationsManager.Deposit(transactionModel.Amount);
+                _operationsManager.Deposit((int)Session["AccountNumber"], transactionModel.Amount);
                 return View("Index");
             }
             return View();
@@ -65,11 +65,11 @@ namespace ATM.Controllers
         }
 
         [HttpPost]
-        public ActionResult Payment(TransactionViewModel transactionModel)
+        public ActionResult Payment(TransferFundsViewModel transactionModel)
         {
             if (ModelState.IsValid)
             {
-                _operationsManager.Payment(transactionModel.accountNumber, transactionModel.Amount);
+                _operationsManager.Payment((int)Session["AccountNumber"], transactionModel.recipientAccountNumber, transactionModel.Amount);
                 return View("Index");
             }
             return View();
@@ -81,34 +81,29 @@ namespace ATM.Controllers
         }
 
         [HttpPost]
-        public ActionResult TransferFunds(TransactionViewModel transactionModel)
+        public ActionResult TransferFunds(TransferFundsViewModel transactionModel)
         {
             if (ModelState.IsValid)
             {
-                _operationsManager.TransferFunds(transactionModel.accountNumber, transactionModel.Amount);
+                _operationsManager.TransferFunds((int)Session["AccountNumber"], transactionModel.recipientAccountNumber, transactionModel.Amount);
                 return View("Index");
             }
             return View();
         }
 
-        public ActionResult QuickCash(string accountNumber)
+        public ActionResult QuickCash()
         {
-            if (accountNumber != "")
-            {
-                _operationsManager.QuickCash();
+                _operationsManager.QuickCash((int)Session["AccountNumber"]);
                 return View();
-            }
-            return View("Index");
+            
         }
 
-        public ActionResult PrintStatement(string accountNumber)
+        public ActionResult PrintStatement()
         {
-            if (accountNumber != "")
-            {
-                string statement = _operationsManager.PrintStatement();
+
+                string statement = _operationsManager.PrintStatement((int)Session["AccountNumber"]);
                 return View((object)statement);
-            }
-            return View("Index");
+
         }
     }
 }

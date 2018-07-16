@@ -1,4 +1,5 @@
 ﻿using ATM.Core.Entities;
+using ATM.Core.Interfaces.Services;
 using ATM.Core.Services;
 using ATM.Models;
 using Microsoft.AspNet.Identity;
@@ -16,10 +17,11 @@ namespace ATM.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private BankAccountManager _bankManager; 
+        private IBankAccountService _bankManager; 
 
-        public AccountController()
+        public AccountController(IBankAccountService bankManager)
         {
+            _bankManager = bankManager;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)

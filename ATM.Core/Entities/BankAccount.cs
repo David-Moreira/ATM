@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ATM.Core.Entities
 {
     public class BankAccount
     {
-
+        [Key]
         public int AccountNumber { get; set; }
 
         public int Balance { get; set; }
