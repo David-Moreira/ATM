@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace ATM.Core.Interfaces.Services
 {
-    interface IBankAccountService : IServiceBase<BankAccount>
+    public interface IBankAccountService : IServiceBase<BankAccount>
     {
+        BankAccount GetByUserId(string id);
     }
 }

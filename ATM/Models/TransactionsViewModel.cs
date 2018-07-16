@@ -10,7 +10,7 @@ namespace ATM.Models
 
         [Required]
         [RegularExpression(@"\d{6,10}")]
-        public string accountNumber { get; set; }
+        public int accountNumber { get; set; }
     }
 
     public class TransactionViewModel : StandardTransactionViewModel { } //Withdraw | Deposit

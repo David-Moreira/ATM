@@ -18,5 +18,18 @@ namespace ATM.Core.Services
             _bankAccountRepo = bankAccountRepo;
         }
 
+        public override BankAccount Add(BankAccount newAcc)
+        {
+            if (String.IsNullOrEmpty(newAcc.UserID))
+                throw new Exception("No user associated with account.");
+
+            newAcc.AccountNumber = int.Parse(GetAll().Count().ToString().PadLeft(10, '0'));
+            return base.Add(newAcc);
+        }
+
+        public BankAccount GetByUserId(string id)
+        {
+            return _bankAccountRepo.GetSingle(x => x.UserID == id);
+        }
     }
 }

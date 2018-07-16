@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ATM.Core.Interfaces.Services
 {
-    interface ITransactionService : IServiceBase<Transaction>
+    public interface ITransactionService : IServiceBase<Transaction>
     {
     }
 }

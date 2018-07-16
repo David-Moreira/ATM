@@ -7,7 +7,7 @@ namespace ATM.Core.Entities
     public class BankAccount
     {
 
-        public string AccountNumber { get; set; }
+        public int AccountNumber { get; set; }
 
         public int Balance { get; set; }
 
@@ -24,9 +24,6 @@ namespace ATM.Core.Entities
         }
 
         public string UserID { get; set; }
-
-        [ForeignKey("UserID")]
-        public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<Transaction> Transactions { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using ATM.Models;
+﻿using ATM.Core.Interfaces.Services;
+using ATM.Models;
 using Microsoft.AspNet.Identity;
 using System.Web.Mvc;
 
@@ -8,16 +9,21 @@ namespace ATM.Controllers
     public class OperationsController : Controller
     {
 
+        private IBankAccountService _bankManager;
+        private IOperationService _operationsManager;
 
-
+        public OperationsController(IOperationService operationsManager, IBankAccountService bankManager )
+        {
+            _bankManager = bankManager;
+            _operationsManager = operationsManager;
+        }
         // GET: Operations
         public ActionResult Index()
         {
             string userID = User.Identity.GetUserId();
-            userBankAccountsViewModel userAccount = new userBankAccountsViewModel(); //Probably won't be used as viewmodel nvm
-            userAccount.getuserBankAccount(userID);
-            ViewBag.accountNumber = userAccount.userBankAccount;
-            return View(userAccount);
+            
+            ViewBag.accountNumber = _bankManager.GetByUserId(userID).AccountNumber;
+            return View();
         }
 
         [HttpGet]
@@ -31,8 +37,7 @@ namespace ATM.Controllers
         {
             if (ModelState.IsValid)
             {
-                OperationsModel operation = new OperationsModel(transactionModel.accountNumber);
-                operation.Withdraw(transactionModel.Amount);
+                _operationsManager.Withdraw(transactionModel.Amount);
                 return View("Index");
             }
             return View();
@@ -48,8 +53,7 @@ namespace ATM.Controllers
         {
             if (ModelState.IsValid)
             {
-                OperationsModel operation = new OperationsModel(transactionModel.accountNumber);
-                operation.Deposit(transactionModel.Amount);
+                _operationsManager.Deposit(transactionModel.Amount);
                 return View("Index");
             }
             return View();
@@ -65,8 +69,7 @@ namespace ATM.Controllers
         {
             if (ModelState.IsValid)
             {
-                OperationsModel operation = new OperationsModel(transactionModel.accountNumber);
-                operation.Payment(transactionModel.accountNumber, transactionModel.Amount);
+                _operationsManager.Payment(transactionModel.accountNumber, transactionModel.Amount);
                 return View("Index");
             }
             return View();
@@ -82,8 +85,7 @@ namespace ATM.Controllers
         {
             if (ModelState.IsValid)
             {
-                OperationsModel operation = new OperationsModel(transactionModel.accountNumber);
-                operation.TransferFunds(transactionModel.accountNumber, transactionModel.Amount);
+                _operationsManager.TransferFunds(transactionModel.accountNumber, transactionModel.Amount);
                 return View("Index");
             }
             return View();
@@ -93,8 +95,7 @@ namespace ATM.Controllers
         {
             if (accountNumber != "")
             {
-                OperationsModel operation = new OperationsModel(accountNumber);
-                operation.QuickCash();
+                _operationsManager.QuickCash();
                 return View();
             }
             return View("Index");
@@ -104,8 +105,7 @@ namespace ATM.Controllers
         {
             if (accountNumber != "")
             {
-                OperationsModel operation = new OperationsModel(accountNumber);
-                string statement = operation.PrintStatement();
+                string statement = _operationsManager.PrintStatement();
                 return View((object)statement);
             }
             return View("Index");

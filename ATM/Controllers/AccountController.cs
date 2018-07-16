@@ -1,4 +1,6 @@
-﻿using ATM.Models;
+﻿using ATM.Core.Entities;
+using ATM.Core.Services;
+using ATM.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -14,6 +16,7 @@ namespace ATM.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private BankAccountManager _bankManager; 
 
         public AccountController()
         {
@@ -157,16 +160,13 @@ namespace ATM.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    //ApplicationDbContext db = new ApplicationDbContext();
-                    //BankAccount newAccount = new BankAccount
-                    //{
-                    //    AccountNumber = db.BankAccounts.Count().ToString().PadLeft(10, '0'),
-                    //    FirstName = model.FirstName,
-                    //    LastName = model.LastName,
-                    //    UserID = user.Id
-                    //};
-                    //db.BankAccounts.Add(newAccount);
-                    //db.SaveChanges();
+                    _bankManager.Add(new BankAccount()
+                    {
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        UserID = user.Id
+                    });
+
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

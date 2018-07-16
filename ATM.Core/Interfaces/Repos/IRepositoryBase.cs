@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace ATM.Core.Interfaces
 {
     public interface IRepositoryBase<T> where T : class
     {
         T GetById(int id);
+
+        T GetSingle(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties);
 
         IEnumerable<T> GetAll();
 

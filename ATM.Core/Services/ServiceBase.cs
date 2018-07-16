@@ -17,27 +17,27 @@ namespace ATM.Core.Services
             _repo = repo;
         }
 
-        public T Add(T entity)
+        public virtual T Add(T entity)
         {
             return _repo.Add(entity);
         }
 
-        public void Delete(T entity)
+        public virtual void Delete(T entity)
         {
             _repo.Delete(entity);
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return _repo.GetAll();
         }
 
-        public T GetById(int id)
+        public virtual T GetById(int id)
         {
             return _repo.GetById(id);
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             _repo.Update(entity);
         }

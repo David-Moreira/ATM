@@ -15,10 +15,10 @@ namespace ATM.Core.Interfaces.Services
         void Deposit(int amount);
 
 
-        void Payment(string recipientAccountNumber, int amount);
+        void Payment(int recipientAccountNumber, int amount);
 
 
-        void TransferFunds(string accountNumber, int amount);
+        void TransferFunds(int accountNumber, int amount);
 
 
         void QuickCash();

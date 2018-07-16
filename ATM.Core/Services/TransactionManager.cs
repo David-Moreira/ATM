@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ATM.Core.Services
 {
-    class TransactionManager : ServiceBase<Transaction> , ITransactionService
+    public class TransactionManager : ServiceBase<Transaction> , ITransactionService
     {
         private readonly ITransactionRepo _transactionRepo;
 

@@ -1,7 +1,9 @@
 ﻿using ATM.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace ATM.Infrastructure.Data
 {
@@ -21,7 +23,22 @@ namespace ATM.Infrastructure.Data
 
         public T GetById(int id)
         {
-            return _dbContext.Set<T>().SingleOrDefault(e => e.Id == id);
+            return _dbContext.Set<T>().Find(id);
+        }
+
+        public virtual T GetSingle(Func<T, bool> where,
+         params Expression<Func<T, object>>[] navigationProperties)
+        {
+            T item = null;
+
+            IQueryable<T> dbQuery = _dbContext.Set<T>();
+
+            foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
+                dbQuery = dbQuery.Include<T, object>(navigationProperty);
+
+            item = dbQuery.FirstOrDefault(where);
+            
+            return item;
         }
 
         public IEnumerable<T> GetAll()
