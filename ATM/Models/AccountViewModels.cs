@@ -31,6 +31,7 @@ namespace ATM.Models
         [Required]
         [Display(Name = "Code")]
         public string Code { get; set; }
+
         public string ReturnUrl { get; set; }
 
         [Display(Name = "Remember this browser?")]
@@ -64,7 +65,6 @@ namespace ATM.Models
 
     public class RegisterViewModel
     {
-
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }

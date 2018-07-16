@@ -7,13 +7,11 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:700" rel="stylesheet">
-
 </head>
 <body>
 
-
     <div class="container body-content atm-content">
-       <a href="@Url.Action("Index","Home")"> <div class="divTitle"><h1>ATM Service</h1></div> </a> 
+       <a href="@Url.Action("Index","Home")"> <div class="divTitle"><h1>ATM Service</h1></div> </a>
         @if (Request.IsAuthenticated)
         {
 
@@ -22,10 +20,7 @@
 
         <div>
             @RenderBody()
-
-
-        </div>     
-
+        </div>
         </div>
 
     @Html.Partial("_FooterPartial")

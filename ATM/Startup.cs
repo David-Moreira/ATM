@@ -2,6 +2,7 @@
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(ATM.Startup))]
+
 namespace ATM
 {
     public partial class Startup

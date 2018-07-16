@@ -12,10 +12,10 @@
     <title>TransferFunds</title>
 </head>
 <body>
-    @using (Html.BeginForm()) 
+    @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        
+
         <div class="form-horizontal">
             <h4>TransferFundsViewModel</h4>
             <hr />
@@ -27,9 +27,7 @@
                     @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
 
-    
             <div class="form-group">
                 @Html.LabelFor(model => model.recipientAccountNumber, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -37,7 +35,7 @@
                     @Html.ValidationMessageFor(model => model.recipientAccountNumber, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Create" class="btn btn-default" />
@@ -45,7 +43,7 @@
             </div>
         </div>
     }
-    
+
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>

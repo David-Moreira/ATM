@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using ATM.Models;
+﻿using ATM.Models;
 using Microsoft.AspNet.Identity;
-
+using System.Web.Mvc;
 
 namespace ATM.Controllers
 {
     [Authorize]
     public class OperationsController : Controller
     {
+
 
 
         // GET: Operations
@@ -24,13 +20,11 @@ namespace ATM.Controllers
             return View(userAccount);
         }
 
-
         [HttpGet]
         public ActionResult Withdraw(int accountNumber)
         {
             return View();
         }
-
 
         [HttpPost]
         public ActionResult Withdraw(TransactionViewModel transactionModel)
@@ -44,10 +38,8 @@ namespace ATM.Controllers
             return View();
         }
 
-
         public ActionResult Deposit()
         {
-
             return View();
         }
 
@@ -99,17 +91,14 @@ namespace ATM.Controllers
 
         public ActionResult QuickCash(string accountNumber)
         {
-            if (accountNumber!="")
+            if (accountNumber != "")
             {
                 OperationsModel operation = new OperationsModel(accountNumber);
                 operation.QuickCash();
                 return View();
             }
             return View("Index");
-
         }
-
-
 
         public ActionResult PrintStatement(string accountNumber)
         {
@@ -121,8 +110,5 @@ namespace ATM.Controllers
             }
             return View("Index");
         }
-
-
-
     }
 }
