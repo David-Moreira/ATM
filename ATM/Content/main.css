@@ -1,4 +1,66 @@
-﻿.atm-logo {
+﻿
+h6 {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+/* Login */
+.account-login-form .pin-input {
+    text-align: center;
+    width: 35%;
+    font-size: 30px;
+}
+
+.account-login-form ul {
+    list-style: none;
+}
+
+#pinPad {
+    display: inline-block;
+    float: left;
+}
+
+    #pinPad td {
+        padding: 1rem;
+    }
+
+    #pinPad a {
+        font-size: 3rem;
+        padding: 1rem 3rem;
+    }
+
+#confirmPin {
+    display: block;
+    float: left;
+    margin-left: 8px;
+    margin-top: 1rem;
+}
+
+    #confirmPin input {
+        text-align: center;
+        font-size: 5rem;
+        padding: 5rem 3rem;
+    }
+
+
+
+/* ENDLogin */
+
+/* Register */
+.register-link {
+    display: block;
+    text-decoration: none;
+}
+
+    .register-link:hover {
+        border-color: white;
+        text-decoration: none;
+        background-color: beige;
+    }
+/* ENDRegister */
+
+/* Main */
+.atm-logo {
     font: 900 90px/100px "Helvetica Neue", Helvetica, Arial, sans-serif;
     letter-spacing: -2px;
     margin: 10px 0;
@@ -31,22 +93,16 @@
             text-decoration: none;
         }
 
+.btn-padding {
+    padding: 1.5rem 0;
+    font-size: 3rem;
+    width: 6em;
+}
+
 .tab-text-content {
     font-weight: 600;
     font-size: 25px;
 }
-
-.register-link {
-    display: block;
-    text-decoration: none;
-}
-
-    .register-link:hover {
-        border-color: white;
-        text-decoration: none;
-        background-color: beige;
-    }
-
 
 .side-tab {
     border: solid .2rem #34495E;
@@ -55,23 +111,7 @@
     text-align: center;
 }
 
-#ad-highlight {
-    box-shadow: 0px 0px 8px #7F8C8D;
-}
-
-.adImage {
-    display: block;
-}
-
-    .adImage img {
-        width: 6rem;
-    }
-
-.adText {
-    font-size: 2rem;
-    font-weight: bold;
-    display: block;
-}
+/* ENDMain */
 
 #screenView {
     border: solid .5rem #BDC3C7;
@@ -79,32 +119,6 @@
     box-shadow: -.2rem .3rem 0rem #95A5A6, .2rem .3rem 0rem #95A5A6;
 }
 
-#pinPad {
-    display: inline-block;
-    float: left;
-}
-
-    #pinPad td {
-        padding: 1rem;
-    }
-
-    #pinPad a {
-        font-size: 3rem;
-        padding: 1rem 3rem;
-    }
-
-#confirmPin {
-    display: block;
-    float: left;
-    margin-left: 1rem;
-    margin-top: 1rem;
-}
-
-    #confirmPin input {
-        text-align: center;
-        font-size: 5rem;
-        padding: 5rem 3rem;
-    }
 
 #cancelTransaction {
     display: block;
@@ -113,11 +127,7 @@
     margin-top: 5.5em;
 }
 
-.btn-padding {
-    padding: 1.5rem 0;
-    font-size: 3rem;
-    width: 6em;
-}
+
 
 .tile {
     border: solid 1px #CCC;
@@ -214,4 +224,3 @@ body {
 .dl-horizontal dt {
     white-space: normal;
 }
-

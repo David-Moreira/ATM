@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Input Your Pin Number";
 }
-<div class="row">
+<div class="account-login-form">
     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         <div class="col-xs-8 text-center" style="border-right:solid 3px #CCC">
@@ -11,50 +11,54 @@
 
 
             @Html.AntiForgeryToken()
+
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.PasswordFor(m => m.Password, new { @id = "userPinInput", @class = "form-control pin-input center-block", @readonly = true })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            @Html.PasswordFor(m => m.Password, new {@id= "userPinInput", @class = "form-control", @disabled = true })
-            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                <div id="pinPad">
+                    <table>
+                        <tr>
+                            <td><a id="btn1" class="btn btn-block btn-lg btn-inverse">1</a></td>
+                            <td><a id="btn2" class="btn btn-block btn-lg btn-inverse">2</a></td>
+                            <td><a id="btn3" class="btn btn-block btn-lg btn-inverse">3</a></td>
+                        </tr>
+                        <tr>
+                            <td><a id="btn4" class="btn btn-block btn-lg btn-inverse">4</a></td>
+                            <td><a id="btn5" class="btn btn-block btn-lg btn-inverse">5</a></td>
+                            <td><a id="btn6" class="btn btn-block btn-lg btn-inverse">6</a></td>
+                        </tr>
+                        <tr>
+                            <td><a id="btn7" class="btn btn-block btn-lg btn-inverse">7</a></td>
+                            <td><a id="btn8" class="btn btn-block btn-lg btn-inverse">8</a></td>
+                            <td><a id="btn9" class="btn btn-block btn-lg btn-inverse">9</a></td>
+                        </tr>
+                        <tr>
+                            <td><a id="btn0" href="#" class="btn btn-block btn-lg btn-inverse">0</a></td>
+                            <td colspan="2"><a id="btnClear" class="btn btn-block btn-lg btn-default text-uppercase">Clear</a></td>
 
-            
-            <div id="pinPad">
-                <table>
-                    <tr>
-                        <td><a id="btn1" href="#" class="btn btn-block btn-lg btn-inverse">1</a></td>
-                        <td><a id="btn2" href="#" class="btn btn-block btn-lg btn-inverse">2</a></td>
-                        <td><a id="btn3" href="#" class="btn btn-block btn-lg btn-inverse">3</a></td>
-                    </tr>
-                    <tr>
-                        <td><a id="btn4" href="#" class="btn btn-block btn-lg btn-inverse">4</a></td>
-                        <td><a id="btn5" href="#" class="btn btn-block btn-lg btn-inverse">5</a></td>
-                        <td><a id="btn6" href="#" class="btn btn-block btn-lg btn-inverse">6</a></td>
-                    </tr>
-                    <tr>
-                        <td><a id="btn7" href="#" class="btn btn-block btn-lg btn-inverse">7</a></td>
-                        <td><a id="btn8" href="#" class="btn btn-block btn-lg btn-inverse">8</a></td>
-                        <td><a id="btn9" href="#" class="btn btn-block btn-lg btn-inverse">9</a></td>
-                    </tr>
-                    <tr>
-                        <td><a id="btn0" href="#" class="btn btn-block btn-lg btn-inverse">0</a></td>
-                        <td colspan="2"><a id="btnClear" href="#" class="btn btn-block btn-lg btn-default text-uppercase">Clear</a></td>
+                        </tr>
+                    </table>
+                </div>
 
-                    </tr>
-                </table>
+                <div id="confirmPin">
+                    <input type="submit" class="btn btn-block btn-lg btn-success text-uppercase" value="Confirm" />
+                </div>
+                <div id="cancelTransaction">
+                    <a href="@Url.Action("Index","Home")" class="btn btn-block btn-lg btn-danger text-uppercase"><span class="fui-cross"></span> Cancel</a>
+                </div>
+
             </div>
-
-            <div id="confirmPin">
-                <input type="submit" class="btn btn-block btn-lg btn-success text-uppercase" value="Confirm"/>
-            </div>
-            <div id="cancelTransaction">
-                <a href="@Url.Action("Index","Home")" class="btn btn-block btn-lg btn-danger text-uppercase"><span class="fui-cross"></span> Cancel</a>
-            </div>
-
-        </div>
 
         <div class="col-xs-4">
+            <h1 class="demo-section-title text-uppercase text-center">Email</h1>
             <div class="form-group">
-                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
+                <div class="col-md-12">
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
@@ -66,3 +70,19 @@
 
     }
 </div>
+
+@section scripts{
+
+    
+    <script type="text/javascript">
+        let btnArray = [];
+        let btnClear = document.querySelector("#btnClear");
+        let userInput = document.querySelector("#userPinInput");
+        for (let i = 0; i < 10; i++)
+        {
+            document.querySelector("#btn" + i).addEventListener("click", () => userInput.value += i);
+        }
+        btnClear.addEventListener("click", () => userInput.value = "");
+    </script>
+
+}

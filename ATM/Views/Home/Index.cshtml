@@ -7,7 +7,7 @@
 
 
 <div class="col-xs-8 text-center">
-    <h1 class="demo-section-title text-uppercase text-center">Insert Card to Begin</h1>
+
 
     @if (!Request.IsAuthenticated)
     {
@@ -15,6 +15,7 @@
     }
     else
     {
+        <h1 class="demo-section-title text-uppercase text-center">Insert Card to Begin</h1>
         @Html.ActionLink("Go to Operations", "Index", "Operations")
 
     }

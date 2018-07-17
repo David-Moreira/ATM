@@ -12,10 +12,20 @@
     <div class="container">
         <div class="demo-headline" style="padding:0px;">
             <h1 class="atm-logo">
-                <a href="@Url.Action("Index", "Home")">
-                    ATM
-                    <small>24 Hour Banking</small>
-                </a>
+                @if (Request.IsAuthenticated)
+                {
+                    <a href="@Url.Action("Index", "Operations")">
+                        ATM
+                        <small>24 Hour Banking</small>
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Index", "Home")">
+                        ATM
+                        <small>24 Hour Banking</small>
+                    </a>
+                }
             </h1>
         </div>
         <div class="row">
@@ -28,8 +38,6 @@
         </div>
     </div>
     @Html.Partial("_FooterPartial")
-    <script src="dist/js/flat-ui.min.js"></script>
-    <script src="docs/assets/js/application.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")

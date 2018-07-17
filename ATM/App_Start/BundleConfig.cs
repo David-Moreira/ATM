@@ -25,9 +25,9 @@ namespace ATM
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/bootstrap-theme.min",
-                      "~/Content/main.min.css",
+                      "~/Assets/dist/css/flat-ui.min.css",
                       "~/Content/demo.min.css",
-                      "~/Assets/dist/css/flat-ui.min.css"));
+                      "~/Content/main.min.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
             "~/Assets/dist/js/flat-ui.min.js"));
