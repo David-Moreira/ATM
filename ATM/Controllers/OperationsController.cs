@@ -8,20 +8,20 @@ namespace ATM.Controllers
     [Authorize]
     public class OperationsController : Controller
     {
-
         private IBankAccountService _bankManager;
         private IOperationService _operationsManager;
 
-        public OperationsController(IOperationService operationsManager, IBankAccountService bankManager )
+        public OperationsController(IOperationService operationsManager, IBankAccountService bankManager)
         {
             _bankManager = bankManager;
             _operationsManager = operationsManager;
         }
+
         // GET: Operations
         public ActionResult Index()
         {
             string userID = User.Identity.GetUserId();
-            
+
             Session["AccountNumber"] = _bankManager.GetByUserId(userID).AccountNumber;
             return View();
         }
@@ -93,17 +93,14 @@ namespace ATM.Controllers
 
         public ActionResult QuickCash()
         {
-                _operationsManager.QuickCash((int)Session["AccountNumber"]);
-                return View();
-            
+            _operationsManager.QuickCash((int)Session["AccountNumber"]);
+            return View();
         }
 
         public ActionResult PrintStatement()
         {
-
-                string statement = _operationsManager.PrintStatement((int)Session["AccountNumber"]);
-                return View((object)statement);
-
+            string statement = _operationsManager.PrintStatement((int)Session["AccountNumber"]);
+            return View((object)statement);
         }
     }
 }

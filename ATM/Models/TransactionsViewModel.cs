@@ -9,7 +9,6 @@ namespace ATM.Models
         public int Amount { get; set; }
 
         [Required]
-        //[RegularExpression(@"\d{6,10}")]
         public int accountNumber { get; set; }
     }
 
@@ -18,7 +17,6 @@ namespace ATM.Models
     public class TransferFundsViewModel : StandardTransactionViewModel //Transfer funds | Payment
     {
         [Required]
-        //[RegularExpression(@"\d{6,10}")]
         public int recipientAccountNumber { get; set; }
     }
 }

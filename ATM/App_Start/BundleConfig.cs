@@ -23,8 +23,14 @@ namespace ATM
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/bootstrap-theme.min",
+                      "~/Content/main.min.css",
+                      "~/Content/demo.min.css",
+                      "~/Assets/dist/css/flat-ui.min.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/js").Include(
+            "~/Assets/dist/js/flat-ui.min.js"));
         }
     }
 }

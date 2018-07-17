@@ -1,32 +1,39 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title | ATM</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 <body>
-
-    <div class="container body-content atm-content">
-       <a href="@Url.Action("Index","Home")"> <div class="divTitle"><h1>ATM Service</h1></div> </a>
-        @if (Request.IsAuthenticated)
-        {
-
-            @Html.Partial("_LoggedInPartial")
-        }
-
-        <div>
-            @RenderBody()
+    <div class="container">
+        <div class="demo-headline" style="padding:0px;">
+            <h1 class="atm-logo">
+                <a href="@Url.Action("Index", "Home")">
+                    ATM
+                    <small>24 Hour Banking</small>
+                </a>
+            </h1>
         </div>
-        </div>
+        <div class="row">
+            <div class="col-xs-12" id="screenView">
+                <div class="row">
+                    @RenderBody()
+                </div>
+            </div>
 
+        </div>
+    </div>
     @Html.Partial("_FooterPartial")
+    <script src="dist/js/flat-ui.min.js"></script>
+    <script src="docs/assets/js/application.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/js")
     @RenderSection("scripts", required: false)
 </body>
 </html>

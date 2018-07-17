@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ATM.Infrastructure.Entities
 {
-
-
     public class BankAccountViewModel
     {
         [Key]
         [Display(Name = "Account #")]
         [Required]
-        //[RegularExpression(@"\d{6,10}", ErrorMessage = "Account # must be between 6 and 10 numbers.")]
         public string AccountNumber { get; set; }
-
 
         [DataType(DataType.Currency)]
         public int Balance { get; set; }
@@ -37,6 +31,5 @@ namespace ATM.Infrastructure.Entities
         }
 
         public string UserID { get; set; }
-
     }
 }

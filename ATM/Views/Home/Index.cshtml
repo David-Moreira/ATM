@@ -3,12 +3,36 @@
     ViewBag.Title = "Home";
 }
 
-@if (!Request.IsAuthenticated)
-{
-    @Html.Partial("_LoginPartial")
-}
-else
-{
-    @Html.ActionLink("Go to Operations", "Index","Operations")
 
-}
+
+
+<div class="col-xs-8 text-center">
+    <h1 class="demo-section-title text-uppercase text-center">Insert Card to Begin</h1>
+
+    @if (!Request.IsAuthenticated)
+    {
+        <a href="@Url.Action("Login","Account")"><img src="~/Assets/Images/InsertCardAnimate.gif" alt="Login" /></a>
+    }
+    else
+    {
+        @Html.ActionLink("Go to Operations", "Index", "Operations")
+
+    }
+</div>
+
+<div class="col-xs-4">
+    <br />
+    <a class="register-link" href="@Url.Action("Register","Account")">
+        <div class="side-tab">
+
+            <div class="tab-text-content center-block">
+                <span>Register your card </span>
+                <div>
+                    <i class="fa fa-2x fa-credit-card"></i>
+                </div>
+            </div>
+
+        </div>
+    </a>
+</div>
+

@@ -1,18 +1,11 @@
 ﻿using ATM.Core.Entities;
-using ATM.Core.Interfaces;
 using ATM.Core.Interfaces.Services;
-using ATM.Core.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ATM.Core.Facade
 {
     public class OperationManager : IOperationService
     {
-
         private readonly IBankAccountService _bankManager;
         private readonly ITransactionService _transactionManager;
 
@@ -25,7 +18,7 @@ namespace ATM.Core.Facade
             _transactionManager = transactionManager;
             _transaction = new Transaction();
         }
-        
+
         //Have to rethink this with transactions
         public void Deposit(int accountNumber, int amount)
         {
@@ -61,10 +54,9 @@ namespace ATM.Core.Facade
 
                 _bankManager.Update(recipientAcc);
                 _bankManager.Update(_bankAccount);
-                
+
                 _transactionManager.Add(_transaction);
                 _transactionManager.Add(recipientTransaction);
-
             }
             else
             {
@@ -134,7 +126,6 @@ namespace ATM.Core.Facade
             _bankAccount = _bankManager.GetById(accountNumber);
             if (_bankAccount.Balance - amount > 0)
             {
-
                 _bankAccount.Balance -= amount;
                 _transaction.AccountNumber = accountNumber;
 
@@ -149,7 +140,5 @@ namespace ATM.Core.Facade
                 throw new InvalidOperationException("Insufficient funds");
             };
         }
-
     }
 }
-

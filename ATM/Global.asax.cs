@@ -1,15 +1,14 @@
-﻿using Ninject.Web.Common.WebHost;
+﻿using ATM.Core.Facade;
+using ATM.Core.Interfaces;
+using ATM.Core.Interfaces.Services;
+using ATM.Core.Services;
+using ATM.Infrastructure.Data;
+using ATM.Infrastructure.Repositories;
+using Ninject;
+using Ninject.Web.Common.WebHost;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Ninject;
-using System;
-using ATM.Core.Interfaces;
-using ATM.Infrastructure.Data;
-using ATM.Infrastructure.Repositories;
-using ATM.Core.Interfaces.Services;
-using ATM.Core.Services;
-using ATM.Core.Facade;
 
 namespace ATM
 {
@@ -40,7 +39,6 @@ namespace ATM
             kernel.Bind<IBankAccountRepo>().To<BankAccountRepo>();
             kernel.Bind<ITransactionRepo>().To<TransactionRepo>();
 
-
             kernel.Bind(typeof(IServiceBase<>)).To(typeof(ServiceBase<>));
             kernel.Bind<IBankAccountService>().To<BankAccountManager>();
             kernel.Bind<ITransactionService>().To<TransactionManager>();
@@ -56,6 +54,5 @@ namespace ATM
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
-
     }
 }
