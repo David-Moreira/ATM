@@ -2,7 +2,11 @@
 @{ViewBag.Title = "Operations";}
 
 <div class="operations-content">
-
+    <div class="row">
+        <div class="col-md-12">
+            @{Html.RenderPartial("_LoggedInPartial");}
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-6">
             @Html.ActionLink("Withdraw", "Withdraw", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
@@ -36,9 +40,5 @@
             @Html.ActionLink("Print Statement", "PrintStatement", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-              @Html.ActionLink("Log Off", "LogOff", "Account",null, new { @class = "btn divItem btn-block" })
-        </div>
-    </div>
+
     </div>

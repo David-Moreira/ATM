@@ -55,7 +55,7 @@ namespace ATM.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-       // [OutputCache(Duration = 86400)]
+        [OutputCache(Duration = 86400)]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
