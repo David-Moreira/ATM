@@ -1,0 +1,26 @@
+[
+  {
+    "outputFileName": "Content/main.min.css",
+    "inputFiles": [
+      "Content/main.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/demo.min.css",
+    "inputFiles": [
+      "Content/demo.css"
+    ]
+  },
+  {
+    "outputFileName": "Assets/dist/css/flat-ui.min.css",
+    "inputFiles": [
+      "Assets/dist/css/flat-ui.css"
+    ]
+  },
+  {
+    "outputFileName": "Assets/dist/js/flat-ui.min.js",
+    "inputFiles": [
+      "Assets/dist/js/flat-ui.js"
+    ]
+  }
+]
