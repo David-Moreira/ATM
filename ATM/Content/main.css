@@ -5,8 +5,21 @@
     font-weight:600;
 
 }
-/* EndOperations*/
+ul li 
+{
+    line-height:normal;
+    font-size:16px;
+}
 
+.operations-content .tile{
+    cursor:default;
+}
+.operations-content .tile-option:hover {
+    background-color: #e3ecfe;
+    cursor:pointer;
+}
+
+/* EndOperations*/
 h6 {
     margin-top: 10px;
     font-size: 20px;
@@ -46,7 +59,7 @@ h6 {
 
     #confirmPin input {
         text-align: center;
-        font-size: 5rem;
+        font-size: 4rem;
         padding: 5rem 3rem;
     }
 
@@ -214,7 +227,6 @@ footer {
 
 /* Site.css defaults */
 body {
-    font-family: monospace;
     background-color: white;
     padding-bottom: 30px;
     color: #34495e;
