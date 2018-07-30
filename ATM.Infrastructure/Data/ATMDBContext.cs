@@ -1,6 +1,7 @@
 ﻿using ATM.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
+using System.Web.Configuration;
 
 namespace ATM.Infrastructure.Data
 {
@@ -22,4 +23,5 @@ namespace ATM.Infrastructure.Data
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
     }
+
 }
