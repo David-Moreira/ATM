@@ -22,3 +22,7 @@ Will update design, overall feel and improve the business logic next.
 ## 18/07/2018 
 
 Updated design.
+
+## 31/07/2018
+
+Improved BL, Better validation and error handling in place instead of just throwing/catching exceptions. Improving operations and design... 
