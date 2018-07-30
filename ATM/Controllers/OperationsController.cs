@@ -31,6 +31,11 @@ namespace ATM.Controllers
             return View();
         }
 
+        public ActionResult Accounts()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult Withdraw()
         {

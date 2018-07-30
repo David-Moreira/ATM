@@ -2,9 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 
+
 namespace ATM.Infrastructure.Data
-{
-    public class ATMDBContext : DbContext
+{  
+    
+        public class ATMDBContext : DbContext
     {
         //EF 6.0
         //public ATMDBContext()
@@ -16,7 +18,7 @@ namespace ATM.Infrastructure.Data
         {
             optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["ATMdb"].ToString());
         }
-
+        
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
     }
