@@ -1,0 +1,18 @@
+﻿<div class="demo-headline" style="padding:0px;">
+    <h1 class="atm-logo">
+        @if (Request.IsAuthenticated)
+        {
+            <a href="@Url.Action("Index", "Operations")">
+                ATM
+                <small>24 Hour Banking</small>
+            </a>
+        }
+        else
+        {
+            <a href="@Url.Action("Index", "Home")">
+                ATM
+                <small>24 Hour Banking</small>
+            </a>
+        }
+    </h1>
+</div>

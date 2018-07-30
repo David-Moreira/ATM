@@ -2,43 +2,75 @@
 @{ViewBag.Title = "Operations";}
 
 <div class="operations-content">
-    <div class="row">
-        <div class="col-md-12">
-            @{Html.RenderPartial("_LoggedInPartial");}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            @Html.ActionLink("Withdraw", "Withdraw", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
-        </div>
 
-        <div class="col-md-6">
+    <h1 class="demo-section-title text-uppercase text-center">Options</h1>
 
-            @Html.ActionLink("Deposit", "Deposit", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
-        </div>
+
+    <div class="col-xs-4">
+        <a href="@Url.Action("QuickCash")">
+            <div class="tile tile-option">
+                <img src="~/Assets/Images/quick_cash.png" alt="Quick Cash" class="tile-image big-illustration">
+                <h3 class="tile-title">Quick Cash</h3>
+                <p>Get cash now without looking at account!</p>
+            </div>
+        </a>
     </div>
 
-    <div class="row">
-
-        <div class="col-md-6">
-
-            @Html.ActionLink("Payment", "Payment", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
+        <div class="col-xs-4">
+            <div class="tile tile-option">
+                <img src="~/Assets/Images/accounts_checklist.png" alt="Accounts" class="tile-image">
+                <h3 class="tile-title">Select Account(s)</h3>
+                <p>View available accounts, check balances, and more...</p>
+            </div>
         </div>
 
-        <div class="col-md-6">
-            @Html.ActionLink("Transfer funds", "TransferFunds", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
+        <div class="col-xs-4">
+            <a href="@Url.Action("Deposit")">
+                <div class="tile tile-option">
+                    <img src="~/Assets/Images/deposit_vault.png" alt="Deposits" class="tile-image">
+                    <h3 class="tile-title">Make a Deposit</h3>
+                    <p>Make a cash, check, <br>or envelope deposit.</p>
+                </div>
+            </a>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            @Html.ActionLink("Quick cash | 10€", "QuickCash", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
+    @*<div class="row">
+            <div class="col-md-12">
+                @{Html.RenderPartial("_LoggedInPartial");}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @Html.ActionLink("Withdraw", "Withdraw", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
+            </div>
+
+            <div class="col-md-6">
+
+                @Html.ActionLink("Deposit", "Deposit", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
+            </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="row">
 
-            @Html.ActionLink("Print Statement", "PrintStatement", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
+            <div class="col-md-6">
+
+                @Html.ActionLink("Payment", "Payment", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
+            </div>
+
+            <div class="col-md-6">
+                @Html.ActionLink("Transfer funds", "TransferFunds", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
+            </div>
         </div>
-    </div>
 
-    </div>
+        <div class="row">
+            <div class="col-md-6">
+                
+            </div>
+
+            <div class="col-md-6">
+
+                @Html.ActionLink("Print Statement", "PrintStatement", "Operations", new { accountNumber = ViewBag.accountNumber }, new { @class = "btn divItem btn-block" })
+            </div>
+        </div>*@
+
+</div>

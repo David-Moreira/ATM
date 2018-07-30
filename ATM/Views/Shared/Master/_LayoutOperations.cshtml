@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@{var pageName = ViewContext.RouteData.Values["action"].ToString();}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,31 +11,26 @@
 </head>
 <body>
     <div class="container">
-        <div class="demo-headline" style="padding:0px;">
-            <h1 class="atm-logo">
-                @if (Request.IsAuthenticated)
-                {
-                    <a href="@Url.Action("Index", "Operations")">
-                        ATM
-                        <small>24 Hour Banking</small>
-                    </a>
-                }
-                else
-                {
-                    <a href="@Url.Action("Index", "Home")">
-                        ATM
-                        <small>24 Hour Banking</small>
-                    </a>
-                }
-            </h1>
-        </div>
+        @Html.Partial("_HeaderPartial")
         <div class="row">
             <div class="col-xs-12" id="screenView">
-                <div class="row">
-                    @RenderBody()
-                </div>
-            </div>
+                    <div class="col-xs-9">
+                        @RenderBody()
+                    </div>
+                    <div class="col-xs-3">
+                        <br />
+                        <br />
+                        @{if(pageName != "Index")
+                            {
+                                Html.RenderPartial("_BackPartial");
+                            }
+                        }
+                        @{
+                            Html.RenderPartial("_LoggedInPartial");
+                        }
 
+                    </div>
+            </div>
         </div>
     </div>
     @Html.Partial("_FooterPartial")

@@ -1,0 +1,21 @@
+﻿<div class="tile">
+    <a id="back" href="javascript:void(0);" onclick="goBack('/')" class="btn btn-lg btn-inverse text-uppercase btn-padding"><span class="fui-arrow-left"></span> Back</a>
+</div>
+
+
+<script type="text/javascript">
+    function goBack(fallback) {
+        var useFallback = true;
+
+        window.addEventListener("beforeunload", function () {
+            useFallback = false;
+        });
+
+        window.history.back();
+
+        setTimeout(function () {
+            if (useFallback) { window.location.href = fallback; }
+        }, 100);
+    }
+</script>
+

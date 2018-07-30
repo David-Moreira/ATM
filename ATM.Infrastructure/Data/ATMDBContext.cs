@@ -1,13 +1,22 @@
 ﻿using ATM.Core.Entities;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 namespace ATM.Infrastructure.Data
 {
     public class ATMDBContext : DbContext
     {
-        public ATMDBContext()
-            : base("ATMdb")
+        //EF 6.0
+        //public ATMDBContext()
+        //    : base("ATMdb")
+        //{
+
+
+        //}
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["ATMdb"].ToString());
         }
 
         public DbSet<BankAccount> BankAccounts { get; set; }
