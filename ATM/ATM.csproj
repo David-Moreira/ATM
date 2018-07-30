@@ -99,7 +99,6 @@
     <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
-      
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -246,6 +245,14 @@
     <Content Include="Assets\dist\js\vendor\video-js.swf" />
     <Content Include="Assets\dist\js\vendor\video.js" />
     <Content Include="Assets\Favicon\favicon.ico" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\fonts\glyphicons\flat-ui-icons-regular.svg" />
+    <Content Include="Assets\fonts\lato\lato-black.svg" />
+    <Content Include="Assets\fonts\lato\lato-bold.svg" />
+    <Content Include="Assets\fonts\lato\lato-bolditalic.svg" />
+    <Content Include="Assets\fonts\lato\lato-italic.svg" />
+    <Content Include="Assets\fonts\lato\lato-light.svg" />
+    <Content Include="Assets\fonts\lato\lato-regular.svg" />
     <Content Include="Assets\Images\accounts_checklist.png" />
     <Content Include="Assets\Images\CardInsertedGreenLight.png" />
     <Content Include="Assets\Images\deposit_check.png" />
@@ -303,6 +310,13 @@
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons\flat-ui-icons-regular.svg" />
+    <Content Include="fonts\lato\lato-black.svg" />
+    <Content Include="fonts\lato\lato-bold.svg" />
+    <Content Include="fonts\lato\lato-bolditalic.svg" />
+    <Content Include="fonts\lato\lato-italic.svg" />
+    <Content Include="fonts\lato\lato-light.svg" />
+    <Content Include="fonts\lato\lato-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\main.css" />
     <Content Include="Assets\Images\login\Thumbs.db" />
@@ -397,6 +411,32 @@
     <Content Include="Assets\less\modules\video.less" />
     <Content Include="Assets\less\spaces.less" />
     <Content Include="Assets\less\variables.less" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Assets\fonts\glyphicons\flat-ui-icons-regular.eot" />
+    <Content Include="Assets\fonts\glyphicons\flat-ui-icons-regular.ttf" />
+    <Content Include="Assets\fonts\glyphicons\flat-ui-icons-regular.woff" />
+    <Content Include="Assets\fonts\glyphicons\selection.json" />
+    <Content Include="Assets\fonts\lato\lato-black.eot" />
+    <Content Include="Assets\fonts\lato\lato-black.ttf" />
+    <Content Include="Assets\fonts\lato\lato-black.woff" />
+    <Content Include="Assets\fonts\lato\lato-bold.eot" />
+    <Content Include="Assets\fonts\lato\lato-bold.ttf" />
+    <Content Include="Assets\fonts\lato\lato-bold.woff" />
+    <Content Include="Assets\fonts\lato\lato-bolditalic.eot" />
+    <Content Include="Assets\fonts\lato\lato-bolditalic.ttf" />
+    <Content Include="Assets\fonts\lato\lato-bolditalic.woff" />
+    <Content Include="Assets\fonts\lato\lato-italic.eot" />
+    <Content Include="Assets\fonts\lato\lato-italic.ttf" />
+    <Content Include="Assets\fonts\lato\lato-italic.woff" />
+    <Content Include="Assets\fonts\lato\lato-light.eot" />
+    <Content Include="Assets\fonts\lato\lato-light.ttf" />
+    <Content Include="Assets\fonts\lato\lato-light.woff" />
+    <Content Include="Assets\fonts\lato\lato-regular.eot" />
+    <Content Include="Assets\fonts\lato\lato-regular.ttf" />
+    <Content Include="Assets\fonts\lato\lato-regular.woff" />
     <None Include="bundleconfig.json" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -406,6 +446,28 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="fonts\glyphicons\flat-ui-icons-regular.eot" />
+    <Content Include="fonts\glyphicons\flat-ui-icons-regular.ttf" />
+    <Content Include="fonts\glyphicons\flat-ui-icons-regular.woff" />
+    <Content Include="fonts\glyphicons\selection.json" />
+    <Content Include="fonts\lato\lato-black.eot" />
+    <Content Include="fonts\lato\lato-black.ttf" />
+    <Content Include="fonts\lato\lato-black.woff" />
+    <Content Include="fonts\lato\lato-bold.eot" />
+    <Content Include="fonts\lato\lato-bold.ttf" />
+    <Content Include="fonts\lato\lato-bold.woff" />
+    <Content Include="fonts\lato\lato-bolditalic.eot" />
+    <Content Include="fonts\lato\lato-bolditalic.ttf" />
+    <Content Include="fonts\lato\lato-bolditalic.woff" />
+    <Content Include="fonts\lato\lato-italic.eot" />
+    <Content Include="fonts\lato\lato-italic.ttf" />
+    <Content Include="fonts\lato\lato-italic.woff" />
+    <Content Include="fonts\lato\lato-light.eot" />
+    <Content Include="fonts\lato\lato-light.ttf" />
+    <Content Include="fonts\lato\lato-light.woff" />
+    <Content Include="fonts\lato\lato-regular.eot" />
+    <Content Include="fonts\lato\lato-regular.ttf" />
+    <Content Include="fonts\lato\lato-regular.woff" />
     <None Include="packages.config" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
