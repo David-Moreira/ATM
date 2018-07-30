@@ -169,13 +169,13 @@
             }
 
             data = $.validator.normalizeRules(
-            $.extend(
-                {},
-                $.validator.classRules(element),
-                $.validator.attributeRules(element),
-                $.validator.dataRules(element),
-                $.validator.staticRules(element)
-            ), element);
+                $.extend(
+                    {},
+                    $.validator.classRules(element),
+                    $.validator.attributeRules(element),
+                    $.validator.dataRules(element),
+                    $.validator.staticRules(element)
+                ), element);
 
             // Make sure required is at front
             if (data.required) {
@@ -433,7 +433,7 @@
 
             checkForm: function () {
                 this.prepareForm();
-                for (var i = 0, elements = (this.currentElements = this.elements()) ; elements[i]; i++) {
+                for (var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++) {
                     this.check(elements[i]);
                 }
                 return this.valid();
@@ -584,11 +584,11 @@
                 if (this.settings.focusInvalid) {
                     try {
                         $(this.findLastActive() || this.errorList.length && this.errorList[0].element || [])
-                        .filter(":visible")
-                        .focus()
+                            .filter(":visible")
+                            .focus()
 
-                        // Manually trigger focusin event; without it, focusin handler isn't called, findLastActive won't have anything to find
-                        .trigger("focusin");
+                            // Manually trigger focusin event; without it, focusin handler isn't called, findLastActive won't have anything to find
+                            .trigger("focusin");
                     } catch (e) {
                         // Ignore IE throwing errors when focusing hidden elements
                     }
@@ -608,28 +608,28 @@
 
                 // Select all valid inputs inside the form (no submit or reset buttons)
                 return $(this.currentForm)
-                .find("input, select, textarea, [contenteditable]")
-                .not(":submit, :reset, :image, :disabled")
-                .not(this.settings.ignore)
-                .filter(function () {
-                    var name = this.name || $(this).attr("name"); // For contenteditable
-                    if (!name && validator.settings.debug && window.console) {
-                        console.error("%o has no name assigned", this);
-                    }
+                    .find("input, select, textarea, [contenteditable]")
+                    .not(":submit, :reset, :image, :disabled")
+                    .not(this.settings.ignore)
+                    .filter(function () {
+                        var name = this.name || $(this).attr("name"); // For contenteditable
+                        if (!name && validator.settings.debug && window.console) {
+                            console.error("%o has no name assigned", this);
+                        }
 
-                    // Set form expando on contenteditable
-                    if (this.hasAttribute("contenteditable")) {
-                        this.form = $(this).closest("form")[0];
-                    }
+                        // Set form expando on contenteditable
+                        if (this.hasAttribute("contenteditable")) {
+                            this.form = $(this).closest("form")[0];
+                        }
 
-                    // Select only the first element for each name, and only those with rules specified
-                    if (name in rulesCache || !validator.objectLength($(this).rules())) {
-                        return false;
-                    }
+                        // Select only the first element for each name, and only those with rules specified
+                        if (name in rulesCache || !validator.objectLength($(this).rules())) {
+                            return false;
+                        }
 
-                    rulesCache[name] = true;
-                    return true;
-                });
+                        rulesCache[name] = true;
+                        return true;
+                    });
             },
 
             clean: function (selector) {
@@ -818,14 +818,14 @@
                 }
 
                 var message = this.findDefined(
-                        this.customMessage(element.name, rule.method),
-                        this.customDataMessage(element, rule.method),
+                    this.customMessage(element.name, rule.method),
+                    this.customDataMessage(element, rule.method),
 
-                        // 'title' is never undefined, so handle empty string as undefined
-                        !this.settings.ignoreTitle && element.title || undefined,
-                        $.validator.messages[rule.method],
-                        "<strong>Warning: No message defined for " + element.name + "</strong>"
-                    ),
+                    // 'title' is never undefined, so handle empty string as undefined
+                    !this.settings.ignoreTitle && element.title || undefined,
+                    $.validator.messages[rule.method],
+                    "<strong>Warning: No message defined for " + element.name + "</strong>"
+                ),
                     theregex = /\$?\{(\d+)\}/g;
                 if (typeof message === "function") {
                     message = message.call(this, rule.parameters, element);
@@ -874,7 +874,7 @@
                     }
                 }
                 if (this.settings.unhighlight) {
-                    for (i = 0, elements = this.validElements() ; elements[i]; i++) {
+                    for (i = 0, elements = this.validElements(); elements[i]; i++) {
                         this.settings.unhighlight.call(this, elements[i], this.settings.errorClass, this.settings.validClass);
                     }
                 }
@@ -1092,8 +1092,8 @@
                     .off(".validate")
                     .removeData("validator")
                     .find(".validate-equalTo-blur")
-                        .off(".validate-equalTo")
-                        .removeClass("validate-equalTo-blur");
+                    .off(".validate-equalTo")
+                    .removeClass("validate-equalTo-blur");
             }
         },
 

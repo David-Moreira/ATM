@@ -1,9 +1,9 @@
 <?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns="http://www.w3.org/2000/svg">
 <metadata></metadata>
 <defs>
-<font id="latoblack" horiz-adv-x="1187" >
+<font id="latoblack" horiz-adv-x="1187">
 <font-face units-per-em="2048" ascent="1649" descent="-399" />
 <missing-glyph horiz-adv-x="395" />
 <glyph unicode="&#xfb01;" horiz-adv-x="1288" d="M20 935v125h150v15q0 96 33.5 181.5t103 148.5t177.5 100t257 37q46 0 95.5 -4.5t85.5 -13.5l-11 -161q-2 -26 -25.5 -34t-49.5 -8q-106 0 -176 -16.5t-110.5 -48.5t-56.5 -80.5t-16 -110.5v-5h674v-1060h-317v843h-347v-843h-317v844l-70 14q-36 8 -58 25.5t-22 51.5z " />

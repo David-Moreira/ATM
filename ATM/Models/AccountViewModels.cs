@@ -13,7 +13,6 @@ namespace ATM.Models
         [DataType(DataType.Password)]
         [Display(Name = "PIN")]
         public string Password { get; set; }
-
     }
 
     public class RegisterViewModel

@@ -52,7 +52,6 @@
       supportsHtml5Styles = true;
       supportsUnknownElements = true;
     }
-
   }());
 
   /*--------------------------------------------------------------------------*/
@@ -192,7 +191,6 @@
         data.frag = data.createFrag();
     }
 
-
     ownerDocument.createElement = function(nodeName) {
       //abort shiv
       if (!html5.shivMethods) {
@@ -256,7 +254,6 @@
    * html5 = { 'elements': 'mark section', 'shivCSS': false, 'shivMethods': false };
    */
   var html5 = {
-
     /**
      * An array or space separated string of node names of the elements to shiv.
      * @memberOf html5
@@ -322,5 +319,4 @@
   if(typeof module == 'object' && module.exports){
     module.exports = html5;
   }
-
 }(typeof window !== "undefined" ? window : this, document));

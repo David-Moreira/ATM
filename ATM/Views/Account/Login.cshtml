@@ -9,9 +9,7 @@
         <div class="col-xs-8 text-center" style="border-right:solid 3px #CCC">
             <h1 class="demo-section-title text-uppercase text-center">@ViewBag.Title</h1>
 
-
             @Html.AntiForgeryToken()
-
 
             <div class="form-group">
                 <div class="col-md-12">
@@ -41,7 +39,6 @@
                     <tr>
                         <td><a id="btn0" href="#" class="btn btn-block btn-lg btn-inverse">0</a></td>
                         <td colspan="2"><a id="btnClear" class="btn btn-block btn-lg btn-default text-uppercase">Clear</a></td>
-
                     </tr>
                 </table>
             </div>
@@ -52,7 +49,6 @@
             <div id="cancelTransaction">
                 <a href="@Url.Action("Index","Home")" class="btn btn-block btn-lg btn-danger text-uppercase"><span class="fui-cross"></span> Cancel</a>
             </div>
-
         </div>
 
         <div class="col-xs-4">
@@ -72,7 +68,6 @@
 </div>
 
 @section scripts{
-
 
     <script type="text/javascript">
         let btnArray = [];

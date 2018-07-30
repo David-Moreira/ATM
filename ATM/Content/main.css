@@ -1,11 +1,9 @@
-﻿
-/* Operations */
+﻿/* Operations */
 .operations-content a:hover{
     color:#34495E;
     font-weight:600;
-
 }
-ul li 
+ul li
 {
     line-height:normal;
     font-size:16px;
@@ -62,8 +60,6 @@ h6 {
         font-size: 4rem;
         padding: 5rem 3rem;
     }
-
-
 
 /* ENDLogin */
 
@@ -140,15 +136,12 @@ h6 {
     box-shadow: -.2rem .3rem 0rem #95A5A6, .2rem .3rem 0rem #95A5A6;
 }
 
-
 #cancelTransaction {
     display: block;
     float: right;
     margin-right: 1rem;
     margin-top: 5.5em;
 }
-
-
 
 .tile {
     border: solid 1px #CCC;
@@ -208,7 +201,6 @@ button.routingButton {
     font-size: 2rem;
     width: 100%;
 }
-
 
 footer {
     position: fixed;

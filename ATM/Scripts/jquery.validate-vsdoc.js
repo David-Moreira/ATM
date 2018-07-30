@@ -181,13 +181,13 @@
             }
 
             var data = $.validator.normalizeRules(
-            $.extend(
-                {},
-                $.validator.metadataRules(element),
-                $.validator.classRules(element),
-                $.validator.attributeRules(element),
-                $.validator.staticRules(element)
-            ), element);
+                $.extend(
+                    {},
+                    $.validator.metadataRules(element),
+                    $.validator.classRules(element),
+                    $.validator.attributeRules(element),
+                    $.validator.staticRules(element)
+                ), element);
 
             // make sure required is at front
             if (data.required) {
@@ -286,7 +286,7 @@
                 // click on selects, radiobuttons and checkboxes
                 if (element.name in this.submitted)
                     this.element(element);
-                    // or option elements, check parent select in that case
+                // or option elements, check parent select in that case
                 else if (element.parentNode.name in this.submitted)
                     this.element(element.parentNode);
             },
@@ -388,7 +388,7 @@
 
             checkForm: function () {
                 this.prepareForm();
-                for (var i = 0, elements = (this.currentElements = this.elements()) ; elements[i]; i++) {
+                for (var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++) {
                     this.check(elements[i]);
                 }
                 return this.valid();
@@ -505,10 +505,10 @@
                 if (this.settings.focusInvalid) {
                     try {
                         $(this.findLastActive() || this.errorList.length && this.errorList[0].element || [])
-                        .filter(":visible")
-                        .focus()
-                        // manually trigger focusin event; without it, focusin handler isn't called, findLastActive won't have anything to find
-                        .trigger("focusin");
+                            .filter(":visible")
+                            .focus()
+                            // manually trigger focusin event; without it, focusin handler isn't called, findLastActive won't have anything to find
+                            .trigger("focusin");
                     } catch (e) {
                         // ignore IE throwing errors when focusing hidden elements
                     }
@@ -529,19 +529,19 @@
                 // select all valid inputs inside the form (no submit or reset buttons)
                 // workaround $Query([]).add until http://dev.jquery.com/ticket/2114 is solved
                 return $([]).add(this.currentForm.elements)
-                .filter(":input")
-                .not(":submit, :reset, :image, [disabled]")
-                .not(this.settings.ignore)
-                .filter(function () {
-                    !this.name && validator.settings.debug && window.console && console.error("%o has no name assigned", this);
+                    .filter(":input")
+                    .not(":submit, :reset, :image, [disabled]")
+                    .not(this.settings.ignore)
+                    .filter(function () {
+                        !this.name && validator.settings.debug && window.console && console.error("%o has no name assigned", this);
 
-                    // select only the first element for each name, and only those with rules specified
-                    if (this.name in rulesCache || !validator.objectLength($(this).rules()))
-                        return false;
+                        // select only the first element for each name, and only those with rules specified
+                        if (this.name in rulesCache || !validator.objectLength($(this).rules()))
+                            return false;
 
-                    rulesCache[this.name] = true;
-                    return true;
-                });
+                        rulesCache[this.name] = true;
+                        return true;
+                    });
             },
 
             clean: function (selector) {
@@ -605,7 +605,7 @@
                         }
                     } catch (e) {
                         this.settings.debug && window.console && console.log("exception occured when checking element " + element.id
-                             + ", check the '" + rule.method + "' method", e);
+                            + ", check the '" + rule.method + "' method", e);
                         throw e;
                     }
                 }
@@ -695,7 +695,7 @@
                     }
                 }
                 if (this.settings.unhighlight) {
-                    for (var i = 0, elements = this.validElements() ; elements[i]; i++) {
+                    for (var i = 0, elements = this.validElements(); elements[i]; i++) {
                         this.settings.unhighlight.call(this, elements[i], this.settings.errorClass, this.settings.validClass);
                     }
                 }
@@ -1220,7 +1220,7 @@
         var ajax = $.ajax;
         $.ajax = function (settings) {
             var mode = ("mode" in settings ? settings : $.ajaxSettings).mode,
-				port = ("port" in settings ? settings : $.ajaxSettings).port;
+                port = ("port" in settings ? settings : $.ajaxSettings).port;
             if (mode == "abort") {
                 if (pendingRequests[port]) {
                     pendingRequests[port].abort();

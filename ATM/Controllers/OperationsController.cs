@@ -11,16 +11,11 @@ namespace ATM.Controllers
         private IBankAccountService _bankManager;
         private IOperationService _operationsManager;
 
-
-
-
-
         public int AccountNumber
         {
             get { return (int)Session["AccountNumber"]; }
             private set { Session["AccountNumber"] = value; }
         }
-
 
         public OperationsController(IOperationService operationsManager, IBankAccountService bankManager)
         {

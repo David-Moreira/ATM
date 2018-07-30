@@ -13,7 +13,6 @@
  * http://api.jqueryui.com/category/ui-core/
  */
 (function( $, undefined ) {
-
 var uuid = 0,
 	runiqueId = /^ui-id-\d+$/;
 
@@ -249,10 +248,6 @@ if ( $( "<a>" ).data( "a-b", "a" ).removeData( "a-b" ).data( "a-b" ) ) {
 	})( $.fn.removeData );
 }
 
-
-
-
-
 // deprecated
 $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 
@@ -298,7 +293,6 @@ $.extend( $.ui, {
 
 	// only used by resizable
 	hasScroll: function( el, a ) {
-
 		//If overflow is hidden, the element might have extra content, but the user wants to hide it
 		if ( $( el ).css( "overflow" ) === "hidden") {
 			return false;
@@ -320,7 +314,6 @@ $.extend( $.ui, {
 		return has;
 	}
 });
-
 })( jQuery );
 
 /*!
@@ -334,7 +327,6 @@ $.extend( $.ui, {
  * http://api.jqueryui.com/jQuery.widget/
  */
 (function( $, undefined ) {
-
 var uuid = 0,
 	slice = Array.prototype.slice,
 	_cleanData = $.cleanData;
@@ -842,7 +834,6 @@ $.each( { show: "fadeIn", hide: "fadeOut" }, function( method, defaultEffect ) {
 		}
 	};
 });
-
 })( jQuery );
 
 /*!
@@ -859,7 +850,6 @@ $.each( { show: "fadeIn", hide: "fadeOut" }, function( method, defaultEffect ) {
  *	jquery.ui.widget.js
  */
 (function( $, undefined ) {
-
 var mouseHandled = false;
 $( document ).mouseup( function() {
 	mouseHandled = false;
@@ -1012,7 +1002,6 @@ $.widget("ui.mouse", {
 	_mouseStop: function(/* event */) {},
 	_mouseCapture: function(/* event */) { return true; }
 });
-
 })(jQuery);
 
 /*!
@@ -1026,7 +1015,6 @@ $.widget("ui.mouse", {
  * http://api.jqueryui.com/position/
  */
 (function( $, undefined ) {
-
 $.ui = $.ui || {};
 
 var cachedScrollbarWidth,
@@ -1514,7 +1502,6 @@ $.ui.position = {
 	testElement.innerHTML = "";
 	testElementParent.removeChild( testElement );
 })();
-
 }( jQuery ) );
 
 /*!
@@ -1532,7 +1519,6 @@ $.ui.position = {
  *	jquery.ui.widget.js
  */
 (function( $, undefined ) {
-
 var lastActive,
 	baseClasses = "ui-button ui-widget ui-state-default ui-corner-all",
 	typeClasses = "ui-button-icons-only ui-button-icon-only ui-button-text-icons ui-button-text-icon-primary ui-button-text-icon-secondary ui-button-text-only",
@@ -1910,7 +1896,6 @@ $.widget( "ui.buttonset", {
 			.button( "destroy" );
 	}
 });
-
 }( jQuery ) );
 
 /*!
@@ -1929,7 +1914,6 @@ $.widget( "ui.buttonset", {
  *	jquery.ui.widget.js
  */
 (function( $, undefined ) {
-
 // number of pages in a slider
 // (how many times can you page up/down to go through the whole range)
 var numPages = 5;
@@ -2585,9 +2569,7 @@ $.widget( "ui.slider", $.ui.mouse, {
 			}
 		}
 	}
-
 });
-
 }(jQuery));
 
 /*!
@@ -2601,7 +2583,6 @@ $.widget( "ui.slider", $.ui.mouse, {
  * http://api.jqueryui.com/category/effects-core/
  */
 (function($, undefined) {
-
 var dataSpace = "ui-effects-";
 
 $.effects = {
@@ -2619,7 +2600,6 @@ $.effects = {
  * Date: Wed Jan 16 08:47:09 2013 -0600
  */
 (function( jQuery, undefined ) {
-
 	var stepHooks = "backgroundColor borderBottomColor borderLeftColor borderRightColor borderTopColor color columnRuleColor outlineColor textDecorationColor textEmphasisColor",
 
 	// plusequals test for += 100 -= 100
@@ -2809,7 +2789,6 @@ function stringParse( string ) {
 
 	// Found a stringParser that handled it
 	if ( rgba.length ) {
-
 		// if this came from a parsed string, force "transparent" when alpha is 0
 		// chrome, (and maybe others) return "transparent" as rgba(0,0,0,0)
 		if ( rgba.join() === "0,0,0,0" ) {
@@ -2865,10 +2844,8 @@ color.fn = jQuery.extend( color.prototype, {
 				each( spaces, function( spaceName, space ) {
 					var cache = space.cache;
 					each( space.props, function( key, prop ) {
-
 						// if the cache doesn't exist, and we know how to convert
 						if ( !inst[ cache ] && space.to ) {
-
 							// if the value was null, we don't need to copy it
 							// if the key was alpha, we don't need to copy it either
 							if ( key === "alpha" || red[ key ] == null ) {
@@ -3017,7 +2994,6 @@ color.fn = jQuery.extend( color.prototype, {
 		}
 
 		return "#" + jQuery.map( rgba, function( v ) {
-
 			// default to 0 when nulls exist
 			v = ( v || 0 ).toString( 16 );
 			return v.length === 1 ? "0" + v : v;
@@ -3102,7 +3078,6 @@ spaces.hsla.from = function ( hsla ) {
 	];
 };
 
-
 each( spaces, function( spaceName, space ) {
 	var props = space.props,
 		cache = space.cache,
@@ -3111,7 +3086,6 @@ each( spaces, function( spaceName, space ) {
 
 	// makes rgba() and hsla()
 	color.fn[ spaceName ] = function( value ) {
-
 		// generate a cache for this space if it doesn't exist
 		if ( to && !this[ cache ] ) {
 			this[ cache ] = to( this._rgba );
@@ -3226,7 +3200,6 @@ color.hook = function( hook ) {
 			jQuery.cssHooks[ hook ].set( fx.elem, fx.start.transition( fx.end, fx.pos ) );
 		};
 	});
-
 };
 
 color.hook( stepHooks );
@@ -3269,15 +3242,12 @@ colors = jQuery.Color.names = {
 
 	_default: "#ffffff"
 };
-
 })( jQuery );
-
 
 /******************************************************************************/
 /****************************** CLASS ANIMATIONS ******************************/
 /******************************************************************************/
 (function() {
-
 var classAnimationActions = [ "add", "remove", "toggle" ],
 	shorthandStyles = {
 		border: 1,
@@ -3326,7 +3296,6 @@ function getElementStyles( elem ) {
 
 	return styles;
 }
-
 
 function styleDifference( oldStyle, newStyle ) {
 	var diff = {},
@@ -3410,7 +3379,6 @@ $.effects.animateClass = function( value, duration, easing, callback ) {
 
 		// once all animations have completed:
 		$.when.apply( $, allAnimations.get() ).done(function() {
-
 			// set the final class
 			applyClassChange();
 
@@ -3475,7 +3443,6 @@ $.fn.extend({
 		}, speed, easing, callback );
 	}
 });
-
 })();
 
 /******************************************************************************/
@@ -3483,7 +3450,6 @@ $.fn.extend({
 /******************************************************************************/
 
 (function() {
-
 $.extend( $.effects, {
 	version: "1.10.4",
 
@@ -3546,7 +3512,6 @@ $.extend( $.effects, {
 
 	// Wraps the element around a wrapper that copies position properties
 	createWrapper: function( element ) {
-
 		// if the element is already wrapped, return it
 		if ( element.parent().is( ".ui-effects-wrapper" )) {
 			return element.parent();
@@ -3632,7 +3597,6 @@ $.extend( $.effects, {
 			}
 		}
 
-
 		return element;
 	},
 
@@ -3650,7 +3614,6 @@ $.extend( $.effects, {
 
 // return an effect options object for the given parameters:
 function _normalizeArguments( effect, options, speed, callback ) {
-
 	// allow passing all options as the first parameter
 	if ( $.isPlainObject( effect ) ) {
 		options = effect;
@@ -3822,7 +3785,6 @@ $.fn.extend({
 		return val;
 	}
 });
-
 })();
 
 /******************************************************************************/
@@ -3830,7 +3792,6 @@ $.fn.extend({
 /******************************************************************************/
 
 (function() {
-
 // based on easing equations from Robert Penner (http://www.robertpenner.com/easing)
 
 var baseEasings = {};
@@ -3875,9 +3836,7 @@ $.each( baseEasings, function( name, easeIn ) {
 			1 - easeIn( p * -2 + 2 ) / 2;
 	};
 });
-
 })();
-
 })(jQuery);
 
 /*!
@@ -3891,7 +3850,6 @@ $.each( baseEasings, function( name, easeIn ) {
  *  jquery.ui.mouse.js
  */
 (function ($) {
-
   // Detect touch support
   $.support.touch = 'ontouchend' in document;
 
@@ -3910,7 +3868,6 @@ $.each( baseEasings, function( name, easeIn ) {
    * @param {String} simulatedType The corresponding mouse event
    */
   function simulateMouseEvent (event, simulatedType) {
-
     // Ignore multi-touch events
     if (event.originalEvent.touches.length > 1) {
       return;
@@ -3920,24 +3877,24 @@ $.each( baseEasings, function( name, easeIn ) {
 
     var touch = event.originalEvent.changedTouches[0],
         simulatedEvent = document.createEvent('MouseEvents');
-    
+
     // Initialize the simulated mouse event using the touch event's coordinates
     simulatedEvent.initMouseEvent(
       simulatedType,    // type
-      true,             // bubbles                    
-      true,             // cancelable                 
-      window,           // view                       
-      1,                // detail                     
-      touch.screenX,    // screenX                    
-      touch.screenY,    // screenY                    
-      touch.clientX,    // clientX                    
-      touch.clientY,    // clientY                    
-      false,            // ctrlKey                    
-      false,            // altKey                     
-      false,            // shiftKey                   
-      false,            // metaKey                    
-      0,                // button                     
-      null              // relatedTarget              
+      true,             // bubbles
+      true,             // cancelable
+      window,           // view
+      1,                // detail
+      touch.screenX,    // screenX
+      touch.screenY,    // screenY
+      touch.clientX,    // clientX
+      touch.clientY,    // clientY
+      false,            // ctrlKey
+      false,            // altKey
+      false,            // shiftKey
+      false,            // metaKey
+      0,                // button
+      null              // relatedTarget
     );
 
     // Dispatch the simulated event to the target element
@@ -3949,7 +3906,6 @@ $.each( baseEasings, function( name, easeIn ) {
    * @param {Object} event The widget element's touchstart event
    */
   mouseProto._touchStart = function (event) {
-
     var self = this;
 
     // Ignore the event if another widget is already being handled
@@ -3978,7 +3934,6 @@ $.each( baseEasings, function( name, easeIn ) {
    * @param {Object} event The document's touchmove event
    */
   mouseProto._touchMove = function (event) {
-
     // Ignore event if not handled
     if (!touchHandled) {
       return;
@@ -3996,7 +3951,6 @@ $.each( baseEasings, function( name, easeIn ) {
    * @param {Object} event The document's touchend event
    */
   mouseProto._touchEnd = function (event) {
-
     // Ignore event if not handled
     if (!touchHandled) {
       return;
@@ -4010,7 +3964,6 @@ $.each( baseEasings, function( name, easeIn ) {
 
     // If the touch interaction did not move, it should trigger a click
     if (!this._touchMoved) {
-
       // Simulate the click event
       simulateMouseEvent(event, 'click');
     }
@@ -4026,7 +3979,6 @@ $.each( baseEasings, function( name, easeIn ) {
    * original mouse event handling methods.
    */
   mouseProto._mouseInit = function () {
-    
     var self = this;
 
     // Delegate the touch handlers to the widget's element
@@ -4038,7 +3990,6 @@ $.each( baseEasings, function( name, easeIn ) {
     // Call the original $.ui.mouse init method
     _mouseInit.call(self);
   };
-
 })(jQuery);
 /*!
  * Bootstrap v3.2.0 (http://getbootstrap.com)
@@ -4055,7 +4006,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
-
 
 +function ($) {
   'use strict';
@@ -4105,7 +4055,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
       }
     }
   })
-
 }(jQuery);
 
 /* ========================================================================
@@ -4115,7 +4064,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
-
 
 +function ($) {
   'use strict';
@@ -4165,7 +4113,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
       removeElement()
   }
 
-
   // ALERT PLUGIN DEFINITION
   // =======================
 
@@ -4184,7 +4131,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   $.fn.alert             = Plugin
   $.fn.alert.Constructor = Alert
 
-
   // ALERT NO CONFLICT
   // =================
 
@@ -4193,12 +4139,10 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     return this
   }
 
-
   // ALERT DATA-API
   // ==============
 
   $(document).on('click.bs.alert.data-api', dismiss, Alert.prototype.close)
-
 }(jQuery);
 
 /* ========================================================================
@@ -4208,7 +4152,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
-
 
 +function ($) {
   'use strict';
@@ -4268,7 +4211,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     if (changed) this.$element.toggleClass('active')
   }
 
-
   // BUTTON PLUGIN DEFINITION
   // ========================
 
@@ -4290,7 +4232,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   $.fn.button             = Plugin
   $.fn.button.Constructor = Button
 
-
   // BUTTON NO CONFLICT
   // ==================
 
@@ -4298,7 +4239,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     $.fn.button = old
     return this
   }
-
 
   // BUTTON DATA-API
   // ===============
@@ -4309,7 +4249,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     Plugin.call($btn, 'toggle')
     e.preventDefault()
   })
-
 }(jQuery);
 
 /* ========================================================================
@@ -4319,7 +4258,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
-
 
 +function ($) {
   'use strict';
@@ -4473,7 +4411,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     return this
   }
 
-
   // CAROUSEL PLUGIN DEFINITION
   // ==========================
 
@@ -4496,7 +4433,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   $.fn.carousel             = Plugin
   $.fn.carousel.Constructor = Carousel
 
-
   // CAROUSEL NO CONFLICT
   // ====================
 
@@ -4504,7 +4440,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     $.fn.carousel = old
     return this
   }
-
 
   // CAROUSEL DATA-API
   // =================
@@ -4533,7 +4468,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
       Plugin.call($carousel, $carousel.data())
     })
   })
-
 }(jQuery);
 
 /* ========================================================================
@@ -4543,7 +4477,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
-
 
 +function ($) {
   'use strict';
@@ -4651,7 +4584,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     this[this.$element.hasClass('in') ? 'hide' : 'show']()
   }
 
-
   // COLLAPSE PLUGIN DEFINITION
   // ==========================
 
@@ -4672,7 +4604,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   $.fn.collapse             = Plugin
   $.fn.collapse.Constructor = Collapse
 
-
   // COLLAPSE NO CONFLICT
   // ====================
 
@@ -4680,7 +4611,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     $.fn.collapse = old
     return this
   }
-
 
   // COLLAPSE DATA-API
   // =================
@@ -4704,7 +4634,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
 
     Plugin.call($target, option)
   })
-
 }(jQuery);
 
 /* ========================================================================
@@ -4714,7 +4643,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
-
 
 +function ($) {
   'use strict';
@@ -4819,7 +4747,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     return $parent && $parent.length ? $parent : $this.parent()
   }
 
-
   // DROPDOWN PLUGIN DEFINITION
   // ==========================
 
@@ -4838,7 +4765,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   $.fn.dropdown             = Plugin
   $.fn.dropdown.Constructor = Dropdown
 
-
   // DROPDOWN NO CONFLICT
   // ====================
 
@@ -4846,7 +4772,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     $.fn.dropdown = old
     return this
   }
-
 
   // APPLY TO STANDARD DROPDOWN ELEMENTS
   // ===================================
@@ -4856,7 +4781,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
     .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
     .on('keydown.bs.dropdown.data-api', toggle + ', [role="menu"], [role="listbox"]', Dropdown.prototype.keydown)
-
 }(jQuery);
 
 /* ========================================================================
@@ -4866,7 +4790,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
-
 
 +function ($) {
   'use strict';
@@ -5045,7 +4968,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
           .one('bsTransitionEnd', callback)
           .emulateTransitionEnd(150) :
         callback()
-
     } else if (!this.isShown && this.$backdrop) {
       this.$backdrop.removeClass('in')
 
@@ -5058,7 +4980,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
           .one('bsTransitionEnd', callbackRemove)
           .emulateTransitionEnd(150) :
         callbackRemove()
-
     } else if (callback) {
       callback()
     }
@@ -5087,7 +5008,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     return scrollbarWidth
   }
 
-
   // MODAL PLUGIN DEFINITION
   // =======================
 
@@ -5108,7 +5028,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   $.fn.modal             = Plugin
   $.fn.modal.Constructor = Modal
 
-
   // MODAL NO CONFLICT
   // =================
 
@@ -5116,7 +5035,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     $.fn.modal = old
     return this
   }
-
 
   // MODAL DATA-API
   // ==============
@@ -5137,7 +5055,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     })
     Plugin.call($target, option, this)
   })
-
 }(jQuery);
 
 /* ========================================================================
@@ -5148,7 +5065,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
-
 
 +function ($) {
   'use strict';
@@ -5472,7 +5388,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
            placement == 'top'    ? { top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2  } :
            placement == 'left'   ? { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth } :
         /* placement == 'right' */ { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width   }
-
   }
 
   Tooltip.prototype.getViewportAdjustedDelta = function (placement, pos, actualWidth, actualHeight) {
@@ -5566,7 +5481,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     this.hide().$element.off('.' + this.type).removeData('bs.' + this.type)
   }
 
-
   // TOOLTIP PLUGIN DEFINITION
   // =========================
 
@@ -5587,7 +5501,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   $.fn.tooltip             = Plugin
   $.fn.tooltip.Constructor = Tooltip
 
-
   // TOOLTIP NO CONFLICT
   // ===================
 
@@ -5595,7 +5508,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     $.fn.tooltip = old
     return this
   }
-
 }(jQuery);
 
 /* ========================================================================
@@ -5605,7 +5517,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
-
 
 +function ($) {
   'use strict';
@@ -5627,7 +5538,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     content: '',
     template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
   })
-
 
   // NOTE: POPOVER EXTENDS tooltip.js
   // ================================
@@ -5680,7 +5590,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     return this.$tip
   }
 
-
   // POPOVER PLUGIN DEFINITION
   // =========================
 
@@ -5701,7 +5610,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   $.fn.popover             = Plugin
   $.fn.popover.Constructor = Popover
 
-
   // POPOVER NO CONFLICT
   // ===================
 
@@ -5709,7 +5617,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     $.fn.popover = old
     return this
   }
-
 }(jQuery);
 
 /* ========================================================================
@@ -5719,7 +5626,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
-
 
 +function ($) {
   'use strict';
@@ -5841,7 +5747,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     active.trigger('activate.bs.scrollspy')
   }
 
-
   // SCROLLSPY PLUGIN DEFINITION
   // ===========================
 
@@ -5861,7 +5766,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   $.fn.scrollspy             = Plugin
   $.fn.scrollspy.Constructor = ScrollSpy
 
-
   // SCROLLSPY NO CONFLICT
   // =====================
 
@@ -5869,7 +5773,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     $.fn.scrollspy = old
     return this
   }
-
 
   // SCROLLSPY DATA-API
   // ==================
@@ -5880,7 +5783,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
       Plugin.call($spy, $spy.data())
     })
   })
-
 }(jQuery);
 
 /* ========================================================================
@@ -5890,7 +5792,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
-
 
 +function ($) {
   'use strict';
@@ -5973,7 +5874,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     $active.removeClass('in')
   }
 
-
   // TAB PLUGIN DEFINITION
   // =====================
 
@@ -5992,7 +5892,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   $.fn.tab             = Plugin
   $.fn.tab.Constructor = Tab
 
-
   // TAB NO CONFLICT
   // ===============
 
@@ -6001,7 +5900,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     return this
   }
 
-
   // TAB DATA-API
   // ============
 
@@ -6009,7 +5907,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     e.preventDefault()
     Plugin.call($(this), 'show')
   })
-
 }(jQuery);
 
 /* ========================================================================
@@ -6019,7 +5916,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
-
 
 +function ($) {
   'use strict';
@@ -6106,7 +6002,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     }
   }
 
-
   // AFFIX PLUGIN DEFINITION
   // =======================
 
@@ -6126,7 +6021,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   $.fn.affix             = Plugin
   $.fn.affix.Constructor = Affix
 
-
   // AFFIX NO CONFLICT
   // =================
 
@@ -6134,7 +6028,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     $.fn.affix = old
     return this
   }
-
 
   // AFFIX DATA-API
   // ==============
@@ -6152,7 +6045,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
       Plugin.call($spy, data)
     })
   })
-
 }(jQuery);
 
 /* ========================================================================
@@ -6646,7 +6538,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
       };
 
       return BootstrapSwitch;
-
     })();
     $.fn.bootstrapSwitch = function() {
       var args, option, ret;
@@ -6685,7 +6576,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
       onSwitchChange: function() {}
     };
   })(window.jQuery, window);
-
 }).call(this);
 
 (function ($) {
@@ -6951,7 +6841,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
       makeOptionItemFunction(self.options, 'itemValue');
       makeOptionItemFunction(self.options, 'itemText');
       makeOptionFunction(self.options, 'tagClass');
-      
+
       // Typeahead Bootstrap version 2.3.2
       if (self.options.typeahead) {
         var typeahead = self.options.typeahead || {};
@@ -7006,7 +6896,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
       // typeahead.js
       if (self.options.typeaheadjs) {
           var typeaheadjs = self.options.typeaheadjs || {};
-          
+
           self.$input.typeahead(null, typeaheadjs).on('typeahead:selected', $.proxy(function (obj, datum) {
             if (typeaheadjs.valueKey)
               self.add(datum[typeaheadjs.valueKey]);
@@ -7033,7 +6923,6 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
               }
           }, self));
         }
-        
 
       self.$container.on('keydown', 'input', $.proxy(function(event) {
         var $input = $(event.target),
@@ -7269,7 +7158,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   }
 
   /**
-    * Returns boolean indicates whether user has pressed an expected key combination. 
+    * Returns boolean indicates whether user has pressed an expected key combination.
     * @param object keyPressEvent: JavaScript event object, refer
     *     http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
     * @param object lookupList: expected key combinations, as in:
@@ -9206,7 +9095,6 @@ the specific language governing permissions and limitations under the Apache Lic
 
     nextUid=(function() { var counter=1; return function() { return counter++; }; }());
 
-
     function reinsertElement(element) {
         var placeholder = $(document.createTextNode(''));
 
@@ -9295,7 +9183,6 @@ the specific language governing permissions and limitations under the Apache Lic
         });
     }
 
-
     /**
      * filters mouse events so an event is fired only if the mouse moved.
      *
@@ -9354,7 +9241,6 @@ the specific language governing permissions and limitations under the Apache Lic
                 sometimes modals or others listeners may steal it after its set */
             var isVisible = (el.offsetWidth > 0 || el.offsetHeight > 0);
             if (isVisible && el === document.activeElement) {
-
                 /* after the focus is set move the caret to the end, necessary when we val()
                     just before setting focus */
                 if(el.setSelectionRange)
@@ -9452,7 +9338,6 @@ the specific language governing permissions and limitations under the Apache Lic
 
         dest.attr("class", replacements.join(" "));
     }
-
 
     function markMatch(text, term, markup, escapeMarkup) {
         var match=stripDiacritics(text.toUpperCase()).indexOf(stripDiacritics(term.toUpperCase())),
@@ -9775,7 +9660,6 @@ the specific language governing permissions and limitations under the Apache Lic
     }
 
     AbstractSelect2 = clazz(Object, {
-
         // abstract
         bind: function (func) {
             var self = this;
@@ -10034,7 +9918,6 @@ the specific language governing permissions and limitations under the Apache Lic
                     var populate, id=this.opts.id, liveRegion=this.liveRegion;
 
                     populate=function(results, container, depth) {
-
                         var i, l, result, selectable, disabled, compound, node, label, innerContainer, formatted;
 
                         results = opts.sortResults(results, container, query);
@@ -10042,7 +9925,6 @@ the specific language governing permissions and limitations under the Apache Lic
                         // collect the created nodes for bulk append
                         var nodes = [];
                         for (i = 0, l = results.length; i < l; i = i + 1) {
-
                             result=results[i];
 
                             disabled = (result.disabled === true);
@@ -10070,9 +9952,7 @@ the specific language governing permissions and limitations under the Apache Lic
                                 node.append(label);
                             }
 
-
                             if (compound) {
-
                                 innerContainer=$("<ul></ul>");
                                 innerContainer.addClass("select2-result-sub");
                                 populate(result.children, innerContainer, depth+1);
@@ -10143,7 +10023,6 @@ the specific language governing permissions and limitations under the Apache Lic
                 opts.id=function(e) { return e.id; };
             } else {
                 if (!("query" in opts)) {
-
                     if ("ajax" in opts) {
                         ajaxUrl = opts.element.data("ajax-url");
                         if (ajaxUrl && ajaxUrl.length > 0) {
@@ -10205,7 +10084,6 @@ the specific language governing permissions and limitations under the Apache Lic
             }));
 
             this._sync = this.bind(function () {
-
                 // sync enabled state
                 var disabled = el.prop("disabled");
                 if (disabled === undefined) disabled = false;
@@ -10220,7 +10098,6 @@ the specific language governing permissions and limitations under the Apache Lic
 
                 syncCssClasses(this.dropdown, this.opts.element, this.opts.adaptDropdownCssClass);
                 this.dropdown.addClass(evaluate(this.opts.dropdownCssClass, this.opts.element));
-
             });
 
             // IE8-10 (IE9/10 won't fire propertyChange via attachEventListener)
@@ -10253,7 +10130,6 @@ the specific language governing permissions and limitations under the Apache Lic
          */
         // abstract
         triggerChange: function (details) {
-
             details = details || {};
             details= $.extend({}, details, { type: "change", val: this.val() });
             // prevents recursive triggering
@@ -10458,7 +10334,6 @@ the specific language governing permissions and limitations under the Apache Lic
          */
         // abstract
         open: function () {
-
             if (!this.shouldOpen()) return false;
 
             this.opening();
@@ -10541,8 +10416,6 @@ the specific language governing permissions and limitations under the Apache Lic
                     if (that.opened()) that.positionDropdown();
                 });
             });
-
-
         },
 
         // abstract
@@ -10585,7 +10458,6 @@ the specific language governing permissions and limitations under the Apache Lic
 
         // abstract
         clearSearch: function () {
-
         },
 
         //abstract
@@ -10602,7 +10474,6 @@ the specific language governing permissions and limitations under the Apache Lic
             if (index < 0) return;
 
             if (index == 0) {
-
                 // if the first element is highlighted scroll all the way to the top,
                 // that way any unselectable headers above it will also be scrolled
                 // into view
@@ -10741,10 +10612,8 @@ the specific language governing permissions and limitations under the Apache Lic
                         context: context,
                         matcher: this.opts.matcher,
                         callback: this.bind(function (data) {
-
                     // ignore a response if the select2 has been closed before it was received
                     if (!self.opened()) return;
-
 
                     self.opts.populateResults.call(this, results, data.results, {term: term, page: page, context:context});
                     self.postprocessResults(data, false, false);
@@ -10767,7 +10636,6 @@ the specific language governing permissions and limitations under the Apache Lic
          * Default tokenizer function which does nothing
          */
         tokenize: function() {
-
         },
 
         /**
@@ -11041,7 +10909,6 @@ the specific language governing permissions and limitations under the Apache Lic
     });
 
     SingleSelect2 = clazz(AbstractSelect2, {
-
         // single
 
         createContainer: function () {
@@ -11171,7 +11038,6 @@ the specific language governing permissions and limitations under the Apache Lic
 
         // single
         initContainer: function () {
-
             var selection,
                 container = this.container,
                 dropdown = this.dropdown,
@@ -11274,7 +11140,6 @@ the specific language governing permissions and limitations under the Apache Lic
 
                 if (e.which == KEY.DOWN || e.which == KEY.UP
                     || (e.which == KEY.ENTER && this.opts.openOnEnter)) {
-
                     if (e.altKey || e.ctrlKey || e.shiftKey || e.metaKey) return;
 
                     this.open();
@@ -11290,7 +11155,6 @@ the specific language governing permissions and limitations under the Apache Lic
                     return;
                 }
             }));
-
 
             installKeyUpChangeEvent(this.focusser);
             this.focusser.on("keyup-change input", this.bind(function(e) {
@@ -11357,7 +11221,6 @@ the specific language governing permissions and limitations under the Apache Lic
             this.initContainerWidth();
             this.opts.element.addClass("select2-offscreen");
             this.setPlaceholder();
-
         },
 
         // single
@@ -11467,7 +11330,6 @@ the specific language governing permissions and limitations under the Apache Lic
             var placeholder = this.getPlaceholder();
 
             if (this.isPlaceholderOptionSelected() && placeholder !== undefined) {
-
                 // check for a placeholder option if attached to a select
                 if (this.select && this.getPlaceholderOption() === undefined) return;
 
@@ -11525,7 +11387,6 @@ the specific language governing permissions and limitations under the Apache Lic
 
         // single
         onSelect: function (data, options) {
-
             if (!this.triggerSelect(data)) { return; }
 
             var old = this.opts.element.val(),
@@ -11550,7 +11411,6 @@ the specific language governing permissions and limitations under the Apache Lic
 
         // single
         updateSelection: function (data) {
-
             var container=this.selection.find(".select2-chosen"), formatted, cssClass;
 
             this.selection.data("select2-data", data);
@@ -11659,7 +11519,6 @@ the specific language governing permissions and limitations under the Apache Lic
     });
 
     MultiSelect2 = clazz(AbstractSelect2, {
-
         // multi
         createContainer: function () {
             var container = $(document.createElement("div")).attr({
@@ -11688,7 +11547,6 @@ the specific language governing permissions and limitations under the Apache Lic
             if (opts.element.get(0).tagName.toLowerCase() === "select") {
                 // install the selection initializer
                 opts.initSelection = function (element, callback) {
-
                     var data = [];
 
                     element.find("option").filter(function() { return this.selected && !this.disabled }).each2(function (i, elm) {
@@ -11738,10 +11596,8 @@ the specific language governing permissions and limitations under the Apache Lic
 
         // multi
         selectChoice: function (choice) {
-
             var selected = this.container.find(".select2-search-choice-focus");
             if (selected.length && choice && choice[0] == selected[0]) {
-
             } else {
                 if (selected.length) {
                     this.opts.element.trigger("choice-deselected", selected);
@@ -11769,7 +11625,6 @@ the specific language governing permissions and limitations under the Apache Lic
 
         // multi
         initContainer: function () {
-
             var selector = ".select2-choices", selection;
 
             this.searchContainer = this.container.find(".select2-search-field");
@@ -11840,7 +11695,6 @@ the specific language governing permissions and limitations under the Apache Lic
                     return;
                 } else if (((e.which === KEY.BACKSPACE && this.keydowns == 1)
                     || e.which == KEY.LEFT) && (pos.offset == 0 && !pos.length)) {
-
                     this.selectChoice(selection.find(".select2-search-choice:not(.select2-locked)").last());
                     killEvent(e);
                     return;
@@ -11894,7 +11748,6 @@ the specific language governing permissions and limitations under the Apache Lic
                     // prevent form from being submitted
                     killEvent(e);
                 }
-
             }));
 
             this.search.on("keyup", this.bind(function (e) {
@@ -12068,12 +11921,10 @@ the specific language governing permissions and limitations under the Apache Lic
                     this.open();
                 }
             }
-
         },
 
         // multi
         onSelect: function (data, options) {
-
             if (!this.triggerSelect(data) || data.text === "") { return; }
 
             this.addSelectedChoice(data);
@@ -12258,7 +12109,6 @@ the specific language governing permissions and limitations under the Apache Lic
                     }
                 }
             }
-
         },
 
         // multi
@@ -12344,7 +12194,6 @@ the specific language governing permissions and limitations under the Apache Lic
             return {added: current, removed: old};
         },
 
-
         // multi
         val: function (val, triggerChange) {
             var oldData, self=this;
@@ -12407,7 +12256,6 @@ the specific language governing permissions and limitations under the Apache Lic
 
         // multi
         onSortEnd:function() {
-
             var val=[], self=this;
 
             // show search and move it to the end of the list
@@ -12448,7 +12296,6 @@ the specific language governing permissions and limitations under the Apache Lic
     });
 
     $.fn.select2 = function () {
-
         var args = Array.prototype.slice.call(arguments, 0),
             opts,
             select2,
@@ -12473,7 +12320,6 @@ the specific language governing permissions and limitations under the Apache Lic
                 select2 = multiple ? new window.Select2["class"].multi() : new window.Select2["class"].single();
                 select2.init(opts);
             } else if (typeof(args[0]) === "string") {
-
                 if (indexOf(args[0], allowedMethods) < 0) {
                     throw "Unknown method: " + args[0];
                 }
@@ -12606,7 +12452,6 @@ the specific language governing permissions and limitations under the Apache Lic
             "multi": MultiSelect2
         }
     };
-
 }(jQuery));
 
 /* ============================================================
@@ -12724,5 +12569,4 @@ the specific language governing permissions and limitations under the Apache Lic
     $.fn.radiocheck = old;
     return this;
   };
-
 }(this, jQuery);
