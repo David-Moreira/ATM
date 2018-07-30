@@ -8,4 +8,8 @@
 <h2 class="text-danger">An error occurred while processing your request.</h2>
 <p>
      @Html.DisplayForModel()
+    <span>
+        Exception: 
+    </span>
+    @Html.DisplayForModel(Model.Exception)
 </p>
