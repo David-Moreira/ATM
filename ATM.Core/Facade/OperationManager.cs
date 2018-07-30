@@ -1,5 +1,7 @@
 ﻿using ATM.Core.Entities;
 using ATM.Core.Interfaces.Services;
+using ATM.Core.Interfaces.Validation;
+using ATM.Core.Validation;
 using System;
 
 namespace ATM.Core.Facade
@@ -8,20 +10,27 @@ namespace ATM.Core.Facade
     {
         private readonly IBankAccountService _bankManager;
         private readonly ITransactionService _transactionManager;
+        private readonly IOperationValidator _operationValidator;
 
         private BankAccount _bankAccount;
         private Transaction _transaction;
 
-        public OperationManager(IBankAccountService bankManager, ITransactionService transactionManager)
+
+        public OperationManager(IBankAccountService bankManager, ITransactionService transactionManager, IOperationValidator operationValidator)
         {
+            _operationValidator = operationValidator;
             _bankManager = bankManager;
             _transactionManager = transactionManager;
             _transaction = new Transaction();
         }
 
         //Have to rethink this with transactions
-        public void Deposit(int accountNumber, int amount)
+        public OperationResult Deposit(int accountNumber, int amount)
         {
+            var result = _operationValidator.ValidateAmount(amount);
+            if (!result.Succeeded)
+                return result;
+
             _bankAccount = _bankManager.GetById(accountNumber);
             _bankAccount.Balance += amount;
             _transaction.AccountNumber = accountNumber;
@@ -30,38 +39,40 @@ namespace ATM.Core.Facade
             _transaction.Recipient = _bankAccount.AccountNumber;
             _bankManager.Update(_bankAccount);
             _transactionManager.Add(_transaction);
+
+            return result;
         }
 
-        public void Payment(int accountNumber, int recipientAccountNumber, int amount)
+        public OperationResult Payment(int accountNumber, int recipientAccountNumber, int amount)
         {
             _bankAccount = _bankManager.GetById(accountNumber);
             var recipientAcc = _bankManager.GetById(recipientAccountNumber);
 
-            if (_bankAccount.Balance - amount > 0)
-            {
-                _bankAccount.Balance -= amount;
-                _transaction.AccountNumber = accountNumber;
+            var result = _operationValidator.ValidateAmountForPayment(_bankAccount.Balance, amount);
+            if (!result.Succeeded)
+                return result;
 
-                _transaction.Amount = "-" + amount.ToString();
-                _transaction.Recipient = _bankAccount.AccountNumber;
+            _bankAccount.Balance -= amount;
+            _transaction.AccountNumber = accountNumber;
 
-                recipientAcc.Balance += amount;
+            _transaction.Amount = "-" + amount.ToString();
+            _transaction.Recipient = _bankAccount.AccountNumber;
 
-                Transaction recipientTransaction = new Transaction();
-                recipientTransaction.AccountNumber = _bankAccount.AccountNumber;
-                recipientTransaction.Amount = "+" + amount.ToString();
-                recipientTransaction.Recipient = recipientAcc.AccountNumber;
+            recipientAcc.Balance += amount;
 
-                _bankManager.Update(recipientAcc);
-                _bankManager.Update(_bankAccount);
+            Transaction recipientTransaction = new Transaction();
+            recipientTransaction.AccountNumber = _bankAccount.AccountNumber;
+            recipientTransaction.Amount = "+" + amount.ToString();
+            recipientTransaction.Recipient = recipientAcc.AccountNumber;
 
-                _transactionManager.Add(_transaction);
-                _transactionManager.Add(recipientTransaction);
-            }
-            else
-            {
-                throw new InvalidOperationException("Insufficient funds");
-            };
+            _bankManager.Update(recipientAcc);
+            _bankManager.Update(_bankAccount);
+
+            _transactionManager.Add(_transaction);
+            _transactionManager.Add(recipientTransaction);
+
+            return result;
+
         }
 
         public string PrintStatement(int accountNumber)
@@ -70,75 +81,75 @@ namespace ATM.Core.Facade
             return string.Format("Conta: {0} \nFull Name: {1}\nBalance: {2}", _bankAccount.AccountNumber, _bankAccount.FullName, _bankAccount.Balance);
         }
 
-        public void QuickCash(int accountNumber)
+        public OperationResult QuickCash(int accountNumber)
         {
             _bankAccount = _bankManager.GetById(accountNumber);
-            if (_bankAccount.Balance - 10 > 0)
-            {
-                _bankAccount.Balance -= 10;
-                _transaction.AccountNumber = accountNumber;
 
-                _transaction.Amount = "-10";
-                _transaction.Recipient = _bankAccount.AccountNumber;
+            var result = _operationValidator.ValidateAmountForPayment(_bankAccount.Balance, 10);
+            if (!result.Succeeded)
+                return result;
 
-                _bankManager.Update(_bankAccount);
-                _transactionManager.Add(_transaction);
-            }
-            else
-            {
-                throw new InvalidOperationException("Insufficient funds");
-            };
+            _bankAccount.Balance -= 10;
+            _transaction.AccountNumber = accountNumber;
+
+            _transaction.Amount = "-10";
+            _transaction.Recipient = _bankAccount.AccountNumber;
+
+            _bankManager.Update(_bankAccount);
+            _transactionManager.Add(_transaction);
+
+            return result;
         }
 
-        public void TransferFunds(int accountNumber, int recipientAccountNumber, int amount)
+        public OperationResult TransferFunds(int accountNumber, int recipientAccountNumber, int amount)
         {
             _bankAccount = _bankManager.GetById(accountNumber);
             var recipientAcc = _bankManager.GetById(recipientAccountNumber);
 
-            if (_bankAccount.Balance - amount > 0)
-            {
-                _bankAccount.Balance -= amount;
-                recipientAcc.Balance += amount;
-                _transaction.AccountNumber = recipientAccountNumber;
 
-                _transaction.Amount = "-" + amount.ToString();
-                _transaction.Recipient = _bankAccount.AccountNumber;
+            var result = _operationValidator.ValidateAmountForPayment(_bankAccount.Balance, amount);
+            if (!result.Succeeded)
+                return result;
 
-                Transaction recipientTransaction = new Transaction();
-                recipientTransaction.AccountNumber = _bankAccount.AccountNumber;
-                recipientTransaction.Amount = "+" + amount.ToString();
-                recipientTransaction.Recipient = recipientAcc.AccountNumber;
+            _bankAccount.Balance -= amount;
+            recipientAcc.Balance += amount;
+            _transaction.AccountNumber = recipientAccountNumber;
 
-                _bankManager.Update(recipientAcc);
-                _bankManager.Update(_bankAccount);
+            _transaction.Amount = "-" + amount.ToString();
+            _transaction.Recipient = _bankAccount.AccountNumber;
 
-                _transactionManager.Add(_transaction);
-                _transactionManager.Add(recipientTransaction);
-            }
-            else
-            {
-                throw new InvalidOperationException("Insufficient funds");
-            };
+            Transaction recipientTransaction = new Transaction();
+            recipientTransaction.AccountNumber = _bankAccount.AccountNumber;
+            recipientTransaction.Amount = "+" + amount.ToString();
+            recipientTransaction.Recipient = recipientAcc.AccountNumber;
+
+            _bankManager.Update(recipientAcc);
+            _bankManager.Update(_bankAccount);
+
+            _transactionManager.Add(_transaction);
+            _transactionManager.Add(recipientTransaction);
+            return result;
+
         }
 
-        public void Withdraw(int accountNumber, int amount)
+        public OperationResult Withdraw(int accountNumber, int amount)
         {
             _bankAccount = _bankManager.GetById(accountNumber);
-            if (_bankAccount.Balance - amount > 0)
-            {
-                _bankAccount.Balance -= amount;
-                _transaction.AccountNumber = accountNumber;
 
-                _transaction.Amount = "-" + amount.ToString();
-                _transaction.Recipient = _bankAccount.AccountNumber;
+            var result = _operationValidator.ValidateAmountForPayment(_bankAccount.Balance, amount);
+            if (!result.Succeeded)
+                return result;
 
-                _bankManager.Update(_bankAccount);
-                _transactionManager.Add(_transaction);
-            }
-            else
-            {
-                throw new InvalidOperationException("Insufficient funds");
-            };
+            _bankAccount.Balance -= amount;
+            _transaction.AccountNumber = accountNumber;
+
+            _transaction.Amount = "-" + amount.ToString();
+            _transaction.Recipient = _bankAccount.AccountNumber;
+
+            _bankManager.Update(_bankAccount);
+            _transactionManager.Add(_transaction);
+            return result;
+
         }
     }
 }

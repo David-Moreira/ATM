@@ -224,6 +224,18 @@ body {
     color: #34495e;
 }
 
+.no-margin{
+    margin:0px;
+}
+
+input{
+    max-width:100%;
+}
+
+.apply-border {
+    border-radius: 5px;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;

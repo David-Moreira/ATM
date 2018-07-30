@@ -53,10 +53,14 @@
     <Compile Include="Interfaces\Services\IOperationService.cs" />
     <Compile Include="Interfaces\Services\IServiceBase.cs" />
     <Compile Include="Interfaces\Services\ITransactionService.cs" />
+    <Compile Include="Interfaces\Validation\IOperationValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BankAccountManager.cs" />
     <Compile Include="Services\ServiceBase.cs" />
     <Compile Include="Services\TransactionManager.cs" />
+    <Compile Include="Validation\OperationError.cs" />
+    <Compile Include="Validation\OperationResult.cs" />
+    <Compile Include="Validation\OperationValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

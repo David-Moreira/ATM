@@ -1,9 +1,7 @@
-﻿@{ViewBag.Title = "Operations";}
+﻿@{ViewBag.Title = "Options";}
 
 <div class="operations-content">
-
-    <h1 class="demo-section-title text-uppercase text-center">Options</h1>
-
+    @Html.Partial("Operations/_Title")
     <div class="col-xs-4">
         <a href="@Url.Action("QuickCash")">
             <div class="tile tile-option">
@@ -14,21 +12,25 @@
         </a>
     </div>
 
-        <div class="col-xs-4">
-            <div class="tile tile-option">
-                <img src="~/Assets/Images/accounts_checklist.png" alt="Accounts" class="tile-image">
-                <h3 class="tile-title">Select Account(s)</h3>
-                <p>View available accounts, check balances, and more...</p>
-            </div>
+    <div class="col-xs-4">
+        <div class="tile tile-option">
+            <img src="~/Assets/Images/accounts_checklist.png" alt="Accounts" class="tile-image">
+            <h3 class="tile-title">Select Account(s)</h3>
+            <p>View available accounts, check balances, and more...</p>
         </div>
+    </div>
 
-        <div class="col-xs-4">
-            <a href="@Url.Action("Deposit")">
-                <div class="tile tile-option">
-                    <img src="~/Assets/Images/deposit_vault.png" alt="Deposits" class="tile-image">
-                    <h3 class="tile-title">Make a Deposit</h3>
-                    <p>Make a cash, check, <br>or envelope deposit.</p>
-                </div>
-            </a>
-        </div>
+    <div class="col-xs-4">
+        <a href="@Url.Action("Deposit")">
+            <div class="tile tile-option">
+                <img src="~/Assets/Images/deposit_vault.png" alt="Deposits" class="tile-image">
+                <h3 class="tile-title">Make a Deposit</h3>
+                <p>Make a cash, check, <br>or envelope deposit.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-xs-12">
+        Temp Error Handling here:
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+    </div>
 </div>

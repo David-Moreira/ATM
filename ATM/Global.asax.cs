@@ -1,7 +1,9 @@
 ﻿using ATM.Core.Facade;
 using ATM.Core.Interfaces;
 using ATM.Core.Interfaces.Services;
+using ATM.Core.Interfaces.Validation;
 using ATM.Core.Services;
+using ATM.Core.Validation;
 using ATM.Infrastructure.Data;
 using ATM.Infrastructure.Repositories;
 using Ninject;
@@ -43,6 +45,7 @@ namespace ATM
             kernel.Bind<IBankAccountService>().To<BankAccountManager>();
             kernel.Bind<ITransactionService>().To<TransactionManager>();
             kernel.Bind<IOperationService>().To<OperationManager>();
+            kernel.Bind<IOperationValidator>().To<OperationValidator>();
         }
 
         protected override void OnApplicationStarted()

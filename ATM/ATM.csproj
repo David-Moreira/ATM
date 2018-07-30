@@ -494,6 +494,9 @@
     <Content Include="Views\Shared\_HeaderPartial.cshtml" />
     <Content Include="Views\Operations\Accounts.cshtml" />
     <Content Include="Views\Operations\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Operations\_Title.cshtml" />
+    <Content Include="Views\Operations\DepositCash.cshtml" />
+    <Content Include="Views\Operations\DepositCheck.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
