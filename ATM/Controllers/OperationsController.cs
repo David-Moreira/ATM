@@ -66,7 +66,7 @@ namespace ATM.Controllers
             if (ModelState.IsValid)
             {
                 _operationsManager.Withdraw(AccountNumber.Value, transactionModel.Amount);
-                return View("Index");
+                return RedirectToAction("Index");
             }
             return View();
         }
@@ -98,7 +98,7 @@ namespace ATM.Controllers
             if (ModelState.IsValid)
             {
                 _operationsManager.Deposit(AccountNumber.Value, amount);
-                return View("Index");
+                return RedirectToAction("Index");
             }
             return View();
         }
@@ -114,7 +114,7 @@ namespace ATM.Controllers
             if (ModelState.IsValid)
             {
                 _operationsManager.Payment(AccountNumber.Value, transactionModel.recipientAccountNumber, transactionModel.Amount);
-                return View("Index");
+                return RedirectToAction("Index");
             }
             return View();
         }
@@ -130,7 +130,7 @@ namespace ATM.Controllers
             if (ModelState.IsValid)
             {
                 _operationsManager.TransferFunds(AccountNumber.Value, transactionModel.recipientAccountNumber, transactionModel.Amount);
-                return View("Index");
+                return RedirectToAction("Index");
             }
             return View();
         }
@@ -141,7 +141,7 @@ namespace ATM.Controllers
             if (result.Succeeded)
                 return View();
              AddErrors(result);
-             return View("Index");
+             return RedirectToAction("Index");
         }
 
         public ActionResult PrintStatement()
