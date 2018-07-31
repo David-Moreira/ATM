@@ -2,6 +2,7 @@
 using ATM.Core.Validation;
 using ATM.Models;
 using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace ATM.Controllers
@@ -49,8 +50,30 @@ namespace ATM.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Accounts()
         {
+            List<AvailableAccountsViewModel> availableAccounts = new List<AvailableAccountsViewModel>()
+            {
+                new AvailableAccountsViewModel()
+                {
+                    AccountID = 1,
+                    AccountName = "DummyAccount"
+                },
+                new AvailableAccountsViewModel()
+                {
+                    AccountID   = 2,
+                    AccountName = "AnotherDummyAccount"
+                }
+            };
+            return View(availableAccounts);
+        }
+
+        [HttpGet]
+        public ActionResult AccountDetails(int accountNumber)
+        {
+            ViewBag.AccountBalance = _bankManager.GetById(accountNumber).Balance;
+            AccountNumber = accountNumber;
             return View();
         }
 
@@ -150,10 +173,10 @@ namespace ATM.Controllers
             return View((object)statement);
         }
 
-
         public ActionResult BackButton()
         {
             return PartialView("_BackPartial");
         }
+
     }
 }

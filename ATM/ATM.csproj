@@ -178,6 +178,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AvailableAccountsViewModel.cs" />
     <Compile Include="Models\BankAccountViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -497,6 +498,7 @@
     <Content Include="Views\Shared\Operations\_Title.cshtml" />
     <Content Include="Views\Operations\DepositCash.cshtml" />
     <Content Include="Views\Operations\DepositCheck.cshtml" />
+    <Content Include="Views\Operations\AccountDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

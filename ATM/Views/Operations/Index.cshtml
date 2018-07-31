@@ -1,7 +1,6 @@
 ﻿@{ViewBag.Title = "Options";}
 
 <div class="operations-content">
-    @Html.Partial("Operations/_Title")
     <div class="col-xs-4">
         <a href="@Url.Action("QuickCash")">
             <div class="tile tile-option">
@@ -13,11 +12,13 @@
     </div>
 
     <div class="col-xs-4">
-        <div class="tile tile-option">
-            <img src="~/Assets/Images/accounts_checklist.png" alt="Accounts" class="tile-image">
-            <h3 class="tile-title">Select Account(s)</h3>
-            <p>View available accounts, check balances, and more...</p>
-        </div>
+        <a href="@Url.Action("Accounts")">
+            <div class="tile tile-option">
+                <img src="~/Assets/Images/accounts_checklist.png" alt="Accounts" class="tile-image">
+                <h3 class="tile-title">Select Account(s)</h3>
+                <p>View available accounts, check balances, and more...</p>
+            </div>
+         </a>
     </div>
 
     <div class="col-xs-4">
