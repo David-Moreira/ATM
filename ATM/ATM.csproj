@@ -283,12 +283,7 @@
     <Content Include="Assets\Images\InsertCardAnimate.gif" />
     <Content Include="Assets\Images\InsertCashMoneyAnimations.gif" />
     <Content Include="Assets\Images\InsertCheckAnimations.gif" />
-    <Content Include="Assets\Images\login\icon.png" />
-    <Content Include="Assets\Images\login\imac-2x.png" />
-    <Content Include="Assets\Images\login\imac.png" />
     <Content Include="Assets\Images\quick_cash.png" />
-    <Content Include="Assets\Images\tile\ribbon-2x.png" />
-    <Content Include="Assets\Images\tile\ribbon.png" />
     <Content Include="Assets\Images\transfer_money.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -312,8 +307,6 @@
     <Content Include="fonts\lato\lato-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\main.css" />
-    <Content Include="Assets\Images\login\Thumbs.db" />
-    <Content Include="Assets\Images\tile\Thumbs.db" />
     <Content Include="Assets\dist\css\flat-ui.css.map" />
     <Content Include="Assets\dist\css\vendor\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Assets\dist\css\vendor\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
@@ -436,12 +429,8 @@
     <Content Include="fonts\lato\lato-regular.ttf" />
     <Content Include="fonts\lato\lato-regular.woff" />
     <None Include="packages.config" />
-    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-3.2.1.js" />
-    <Content Include="Scripts\jquery-3.2.1.slim.js" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
