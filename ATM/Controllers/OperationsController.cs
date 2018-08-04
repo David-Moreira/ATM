@@ -10,32 +10,9 @@ namespace ATM.Controllers
     [Authorize]
     public class OperationsController : Controller
     {
-
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            if (!AccountNumber.HasValue)
-            {
-                string userID = User.Identity.GetUserId();
-                AccountNumber = _bankManager.GetByUserId(userID).AccountNumber;
-            }
-        }
-
-        private void AddErrors(OperationResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
-        }
-
         private IBankAccountService _bankManager;
-        private IOperationService _operationsManager;
 
-        public int? AccountNumber
-        {
-            get { return (int?)Session["AccountNumber"]; }
-            private set { Session["AccountNumber"] = value; }
-        }
+        private IOperationService _operationsManager;
 
         public OperationsController(IOperationService operationsManager, IBankAccountService bankManager)
         {
@@ -43,10 +20,17 @@ namespace ATM.Controllers
             _operationsManager = operationsManager;
         }
 
-        //[OutputCache(Duration = 86400, VaryByCustom = "UserSession")]
-        public ActionResult Index()
+        public int? AccountNumber
         {
+            get { return (int?)Session["AccountNumber"]; }
+            private set { Session["AccountNumber"] = value; }
+        }
 
+        [HttpGet]
+        public ActionResult AccountDetails(int accountNumber)
+        {
+            ViewBag.AccountBalance = _bankManager.GetById(accountNumber).Balance;
+            AccountNumber = accountNumber;
             return View();
         }
 
@@ -69,11 +53,95 @@ namespace ATM.Controllers
             return View(availableAccounts);
         }
 
-        [HttpGet]
-        public ActionResult AccountDetails(int accountNumber)
+        public ActionResult BackButton()
         {
-            ViewBag.AccountBalance = _bankManager.GetById(accountNumber).Balance;
-            AccountNumber = accountNumber;
+            return PartialView("_BackPartial");
+        }
+
+        [HttpGet]
+        public ActionResult Deposit()
+        {
+            ViewBag.AccountBalance = _bankManager.GetById(AccountNumber.Value).Balance;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Deposit(int amount)
+        {
+            if (ModelState.IsValid)
+            {
+                _operationsManager.Deposit(AccountNumber.Value, amount);
+                return View("Index");
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult DepositCash()
+        {
+            ViewBag.AccountBalance = _bankManager.GetById(AccountNumber.Value).Balance;
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult DepositCheck()
+        {
+            ViewBag.AccountBalance = _bankManager.GetById(AccountNumber.Value).Balance;
+            return View();
+        }
+
+        //[OutputCache(Duration = 86400, VaryByCustom = "UserSession")]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Payment()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Payment(TransferFundsViewModel transactionModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _operationsManager.Payment(AccountNumber.Value, transactionModel.recipientAccountNumber, transactionModel.Amount);
+                return View("Index");
+            }
+            return View();
+        }
+
+        public ActionResult PrintStatement()
+        {
+            string statement = _operationsManager.PrintStatement(AccountNumber.Value);
+            return View((object)statement);
+        }
+
+        public ActionResult QuickCash()
+        {
+            var result = _operationsManager.QuickCash(AccountNumber.Value);
+            if (result.Succeeded)
+                return View();
+            AddErrors(result);
+            return View("Index");
+        }
+
+        [HttpGet]
+        public ActionResult TransferFunds()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult TransferFunds(TransferFundsViewModel transactionModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _operationsManager.TransferFunds(AccountNumber.Value, transactionModel.recipientAccountNumber, transactionModel.Amount);
+                return View("Index");
+            }
             return View();
         }
 
@@ -94,89 +162,21 @@ namespace ATM.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult Deposit()
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            ViewBag.AccountBalance = _bankManager.GetById(AccountNumber.Value).Balance;
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult DepositCash()
-        {
-            ViewBag.AccountBalance = _bankManager.GetById(AccountNumber.Value).Balance;
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult DepositCheck()
-        {
-            ViewBag.AccountBalance = _bankManager.GetById(AccountNumber.Value).Balance;
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Deposit(int amount)
-        {
-            if (ModelState.IsValid)
+            if (!AccountNumber.HasValue)
             {
-                _operationsManager.Deposit(AccountNumber.Value, amount);
-                return View("Index");
+                string userID = User.Identity.GetUserId();
+                AccountNumber = _bankManager.GetByUserId(userID).AccountNumber;
             }
-            return View();
         }
 
-        public ActionResult Payment()
+        private void AddErrors(OperationResult result)
         {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Payment(TransferFundsViewModel transactionModel)
-        {
-            if (ModelState.IsValid)
+            foreach (var error in result.Errors)
             {
-                _operationsManager.Payment(AccountNumber.Value, transactionModel.recipientAccountNumber, transactionModel.Amount);
-                return View("Index");
+                ModelState.AddModelError(string.Empty, error.Description);
             }
-            return View();
         }
-
-        public ActionResult TransferFunds()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult TransferFunds(TransferFundsViewModel transactionModel)
-        {
-            if (ModelState.IsValid)
-            {
-                _operationsManager.TransferFunds(AccountNumber.Value, transactionModel.recipientAccountNumber, transactionModel.Amount);
-                return View("Index");
-            }
-            return View();
-        }
-
-        public ActionResult QuickCash()
-        {
-            var result = _operationsManager.QuickCash(AccountNumber.Value);
-            if (result.Succeeded)
-                return View();
-             AddErrors(result);
-             return View("Index");
-        }
-
-        public ActionResult PrintStatement()
-        {
-            string statement = _operationsManager.PrintStatement(AccountNumber.Value);
-            return View((object)statement);
-        }
-
-        public ActionResult BackButton()
-        {
-            return PartialView("_BackPartial");
-        }
-
     }
 }

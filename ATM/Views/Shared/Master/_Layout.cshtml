@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title | ATM</title>
+    <title>ATM | @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
@@ -13,7 +13,7 @@
         @Html.Partial("_HeaderPartial")
         <div class="row">
             <div class="col-xs-12" id="screenView">
-                    @RenderBody()
+                @RenderBody()
             </div>
         </div>
     </div>
