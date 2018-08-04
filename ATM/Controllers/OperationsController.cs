@@ -126,11 +126,12 @@ namespace ATM.Controllers
             return View((object)statement);
         }
 
+        [HttpGet]
         public ActionResult QuickCash()
         {
             var result = _operationsManager.QuickCash(GetAccountNumber().Value);
             if (result.Succeeded)
-                return View();
+                return View("Success");
             AddErrors(result);
             return View("Index");
         }

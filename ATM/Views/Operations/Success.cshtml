@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "";
+
+}
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <br />
+        <br />
+        <p><i class="fa fa-check fa-4x"></i></p>
+        <p>Operation Successful!</p>
+        <p>You will be redirected to the homepage in <span id="txtSeconds">3</span> seconds...</p>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var intervalID = setInterval(function () {
+            let txtSeconds = document.querySelector("#txtSeconds");
+            let value = txtSeconds.innerHTML - 1;
+            txtSeconds.innerHTML = value;
+            if (value <= 0) {
+                clearInterval(intervalID);
+                txtSeconds.parentElement.innerHTML = "You are being redirected...";
+            }
+        }, 1000);
+        window.setTimeout(function () {
+            window.location.href = '/';
+        }, 3000);
+    </script>
+}

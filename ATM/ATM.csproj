@@ -477,7 +477,7 @@
     <Content Include="Views\Operations\Payment.cshtml" />
     <Content Include="Views\Operations\TransferFunds.cshtml" />
     <Content Include="Views\Operations\PrintStatement.cshtml" />
-    <Content Include="Views\Operations\QuickCash.cshtml" />
+    <Content Include="Views\Operations\Success.cshtml" />
     <Content Include="Views\Shared\Master\_Layout.cshtml" />
     <Content Include="Views\Shared\Master\_LayoutOperations.cshtml" />
     <Content Include="Views\Shared\_BackPartial.cshtml" />
@@ -488,6 +488,7 @@
     <Content Include="Views\Operations\DepositCash.cshtml" />
     <Content Include="Views\Operations\DepositCheck.cshtml" />
     <Content Include="Views\Operations\AccountOperations.cshtml" />
+    <Content Include="Views\Shared\_ErrorDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
