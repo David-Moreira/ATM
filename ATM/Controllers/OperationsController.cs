@@ -20,17 +20,24 @@ namespace ATM.Controllers
             _operationsManager = operationsManager;
         }
 
-        public int? AccountNumber
+        public int? GetAccountNumber()
+        { return (int?)Session["AccountNumber"]; }
+
+        private void SetAccountNumber(int? value)
+        { Session["AccountNumber"] = value; }
+
+        [HttpGet]
+        public ActionResult SelectAccount(int accountNumber)
         {
-            get { return (int?)Session["AccountNumber"]; }
-            private set { Session["AccountNumber"] = value; }
+            //Don't forget to validate if account is related to user
+            SetAccountNumber(accountNumber);
+            return View("Index");
         }
 
         [HttpGet]
-        public ActionResult AccountDetails(int accountNumber)
+        public ActionResult AccountOperations()
         {
-            ViewBag.AccountBalance = _bankManager.GetById(accountNumber).Balance;
-            AccountNumber = accountNumber;
+            ViewBag.AccountBalance = _bankManager.GetById(GetAccountNumber().Value).Balance;
             return View();
         }
 
@@ -61,7 +68,7 @@ namespace ATM.Controllers
         [HttpGet]
         public ActionResult Deposit()
         {
-            ViewBag.AccountBalance = _bankManager.GetById(AccountNumber.Value).Balance;
+            ViewBag.AccountBalance = _bankManager.GetById(GetAccountNumber().Value).Balance;
             return View();
         }
 
@@ -70,7 +77,7 @@ namespace ATM.Controllers
         {
             if (ModelState.IsValid)
             {
-                _operationsManager.Deposit(AccountNumber.Value, amount);
+                _operationsManager.Deposit(GetAccountNumber().Value, amount);
                 return View("Index");
             }
             return View();
@@ -79,14 +86,14 @@ namespace ATM.Controllers
         [HttpGet]
         public ActionResult DepositCash()
         {
-            ViewBag.AccountBalance = _bankManager.GetById(AccountNumber.Value).Balance;
+            ViewBag.AccountBalance = _bankManager.GetById(GetAccountNumber().Value).Balance;
             return View();
         }
 
         [HttpGet]
         public ActionResult DepositCheck()
         {
-            ViewBag.AccountBalance = _bankManager.GetById(AccountNumber.Value).Balance;
+            ViewBag.AccountBalance = _bankManager.GetById(GetAccountNumber().Value).Balance;
             return View();
         }
 
@@ -107,7 +114,7 @@ namespace ATM.Controllers
         {
             if (ModelState.IsValid)
             {
-                _operationsManager.Payment(AccountNumber.Value, transactionModel.recipientAccountNumber, transactionModel.Amount);
+                _operationsManager.Payment(GetAccountNumber().Value, transactionModel.recipientAccountNumber, transactionModel.Amount);
                 return View("Index");
             }
             return View();
@@ -115,13 +122,13 @@ namespace ATM.Controllers
 
         public ActionResult PrintStatement()
         {
-            string statement = _operationsManager.PrintStatement(AccountNumber.Value);
+            string statement = _operationsManager.PrintStatement(GetAccountNumber().Value);
             return View((object)statement);
         }
 
         public ActionResult QuickCash()
         {
-            var result = _operationsManager.QuickCash(AccountNumber.Value);
+            var result = _operationsManager.QuickCash(GetAccountNumber().Value);
             if (result.Succeeded)
                 return View();
             AddErrors(result);
@@ -139,7 +146,7 @@ namespace ATM.Controllers
         {
             if (ModelState.IsValid)
             {
-                _operationsManager.TransferFunds(AccountNumber.Value, transactionModel.recipientAccountNumber, transactionModel.Amount);
+                _operationsManager.TransferFunds(GetAccountNumber().Value, transactionModel.recipientAccountNumber, transactionModel.Amount);
                 return View("Index");
             }
             return View();
@@ -156,7 +163,7 @@ namespace ATM.Controllers
         {
             if (ModelState.IsValid)
             {
-                _operationsManager.Withdraw(AccountNumber.Value, transactionModel.Amount);
+                _operationsManager.Withdraw(GetAccountNumber().Value, transactionModel.Amount);
                 return View("Index");
             }
             return View();
@@ -164,10 +171,10 @@ namespace ATM.Controllers
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (!AccountNumber.HasValue)
+            if (!GetAccountNumber().HasValue)
             {
                 string userID = User.Identity.GetUserId();
-                AccountNumber = _bankManager.GetByUserId(userID).AccountNumber;
+                SetAccountNumber(_bankManager.GetByUserId(userID).AccountNumber);
             }
         }
 

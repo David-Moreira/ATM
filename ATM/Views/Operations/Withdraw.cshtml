@@ -5,21 +5,60 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Withdraw</h4>
-        <hr />
-        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="tile">
+                <a id="qc20" href="#" class="btn btn-lg btn-primary text-uppercase btn-padding">&#36; 20.00</a>
+            </div>
+
+            <div class="tile">
+                <a id="qc40" href="#" class="btn btn-lg btn-primary text-uppercase btn-padding">&#36; 40.00</a>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="tile">
+                <a id="qc60" href="#" class="btn btn-lg btn-primary text-uppercase btn-padding">&#36; 60.00</a>
+            </div>
+
+            <div class="tile">
+                <a id="qc80" href="#" class="btn btn-lg btn-primary text-uppercase btn-padding">&#36; 80.00</a>
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Withdraw" class="btn btn-default" />
+        <div class="col-xs-4">
+            <div class="tile">
+                <a id="qc100" href="#" class="btn btn-lg btn-primary text-uppercase btn-padding">&#36; 100.00</a>
+            </div>
+
+            <div class="tile">
+                <a id="qc200" href="#" class="btn btn-lg btn-primary text-uppercase btn-padding">&#36; 200.00</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h6>Click a button to get that amount of cash.</h6>
+            <h5>or input a multiple of $20. Must be lower than $500</h5>
+            <input type="text" id="qcCustomNumber" class="form-control" placeholder="20.00" disabled />
+            <div id="pinPad">
+                <table>
+                    <tr>
+                        <td><a id="btn1" href="#" class="btn btn-block btn-lg btn-inverse">1</a></td>
+                        <td><a id="btn2" href="#" class="btn btn-block btn-lg btn-inverse">2</a></td>
+                        <td><a id="btn3" href="#" class="btn btn-block btn-lg btn-inverse">3</a></td>
+                        <td><a id="btn4" href="#" class="btn btn-block btn-lg btn-inverse">4</a></td>
+                        <td><a id="btn5" href="#" class="btn btn-block btn-lg btn-inverse">5</a></td>
+                        <td colspan="2"><a id="btnConfirm" href="#" class="btn btn-block btn-lg btn-primary text-uppercase">Confirm</a></td>
+                    </tr>
+                    <tr>
+                        <td><a id="btn6" href="#" class="btn btn-block btn-lg btn-inverse">6</a></td>
+                        <td><a id="btn7" href="#" class="btn btn-block btn-lg btn-inverse">7</a></td>
+                        <td><a id="btn8" href="#" class="btn btn-block btn-lg btn-inverse">8</a></td>
+                        <td><a id="btn9" href="#" class="btn btn-block btn-lg btn-inverse">9</a></td>
+                        <td><a id="btn0" href="#" class="btn btn-block btn-lg btn-inverse">0</a></td>
+                        <td colspan="2"><a id="btnDelete" href="#" class="btn btn-block btn-lg btn-default text-uppercase">Clear</a></td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

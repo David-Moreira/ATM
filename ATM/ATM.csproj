@@ -498,7 +498,7 @@
     <Content Include="Views\Shared\Operations\_Title.cshtml" />
     <Content Include="Views\Operations\DepositCash.cshtml" />
     <Content Include="Views\Operations\DepositCheck.cshtml" />
-    <Content Include="Views\Operations\AccountDetails.cshtml" />
+    <Content Include="Views\Operations\AccountOperations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

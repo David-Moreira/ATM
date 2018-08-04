@@ -1,51 +1,141 @@
-﻿@model ATM.Models.TransferFundsViewModel
+﻿@{ViewBag.Title = "Transfer Funds";}
+<div class="col-xs-12">
+    <blockquote>Transfer funds from one account to another. You can type in a routing number of another account that is not in your available accounts. </blockquote>
+</div>
+<div class="col-xs-6">
+    <div class="tile">
+        <h5>From:</h5>
 
-@{
-    Layout = null;
-}
+        <button data-toggle="modal" data-target="#fromAccount" class="btn btn-block btn-lg btn-inverse"><h6>@Session["AccountNumber"]</h6></button>
+    </div>
+</div>
 
-<!DOCTYPE html>
+<div class="col-xs-6">
+    <div class="tile">
+        <h5>To:</h5>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>TransferFunds</title>
-</head>
-<body>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+        <button data-toggle="modal" data-target="#toAccount" class="btn btn-block btn-lg btn-inverse"><h6>&nbsp;</h6></button>
+    </div>
+</div>
+<div class="col-xs-12">
+    <blockquote><h6>Click an account number to change to a different account.</h6></blockquote>
+</div>
+<div class="col-xs-12" style="margin-bottom: 2rem;">
+    <a href="#" class="btn btn-block btn-lg btn-success"><h6><span class="fui-check"></span> Confirm Transfer</h6></a>
+</div>
 
-        <div class="form-horizontal">
-            <h4>TransferFundsViewModel</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
-                </div>
+<!-- Modal fromAccount -->
+<div class="modal fade" id="fromAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Available Accounts</h4>
             </div>
+            <div class="modal-body">
+                <!-- Available Accounts -->
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.recipientAccountNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.recipientAccountNumber, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.recipientAccountNumber, "", new { @class = "text-danger" })
-                </div>
+                <p>Select from an available account below.</p>
+
+                <a href="#" class="btn btn-block btn-lg btn-inverse text-uppercase modalList">
+                    <p>
+                        <span>Basic Savings</span>
+                        ###-####-5456
+                    </p>
+                </a>
+
+                <a href="#" class="btn btn-block btn-lg btn-inverse text-uppercase modalList">
+                    <p>
+                        <span>Personal Checking</span>
+                        ###-####-3256
+                    </p>
+                </a>
+
+                <a href="#" class="btn btn-block btn-lg btn-inverse text-uppercase modalList">
+                    <p>
+                        <span>Business Checking</span>
+                        ###-####-5455
+                    </p>
+                </a>
+
+                <a href="#" class="btn btn-block btn-lg btn-inverse text-uppercase modalList">
+                    <p>
+                        <span>Investments (MMD)</span>
+                        ###-####-8788
+                    </p>
+                </a>
+
+                <a href="#" class="btn btn-block btn-lg btn-inverse text-uppercase modalList">
+                    <p>
+                        <span>Certificate of Deposite (CD)</span>
+                        ###-####-9897
+                    </p>
+                </a>
+
+                <!-- // END Available Accounts -->
             </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
         </div>
-    }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
     </div>
-</body>
-</html>
+</div>
+
+<!-- Modal toAccount -->
+<div class="modal fade" id="toAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Available Accounts</h4>
+            </div>
+            <div class="modal-body">
+                <!-- Available Accounts -->
+                <p>Input Routing Number</p>
+                <input type="text" id="toAccountCustom" class="form-control" />
+                <button type="button" class="btn btn-primary text-uppercase routingButton">Use Routing Number</button>
+                <p>or select from an available account below.</p>
+
+                <a href="#" class="btn btn-block btn-lg btn-inverse text-uppercase modalList">
+                    <p>
+                        <span>Basic Savings</span>
+                        ###-####-5456
+                    </p>
+                </a>
+
+                <a href="#" class="btn btn-block btn-lg btn-inverse text-uppercase modalList">
+                    <p>
+                        <span>Personal Checking</span>
+                        ###-####-3256
+                    </p>
+                </a>
+
+                <a href="#" class="btn btn-block btn-lg btn-inverse text-uppercase modalList">
+                    <p>
+                        <span>Business Checking</span>
+                        ###-####-5455
+                    </p>
+                </a>
+
+                <a href="#" class="btn btn-block btn-lg btn-inverse text-uppercase modalList">
+                    <p>
+                        <span>Investments (MMD)</span>
+                        ###-####-8788
+                    </p>
+                </a>
+
+                <a href="#" class="btn btn-block btn-lg btn-inverse text-uppercase modalList">
+                    <p>
+                        <span>Certificate of Deposite (CD)</span>
+                        ###-####-9897
+                    </p>
+                </a>
+
+                <!-- // END Available Accounts -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
