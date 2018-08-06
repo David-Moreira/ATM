@@ -9,17 +9,17 @@ namespace ATM.Core.Validation
 {
     public class OperationValidator : IOperationValidator
     {
-        public OperationResult ValidateAmount(int amount)
+        public OperationResult ValidateAmount(decimal amount)
         {
             var errors = new List<OperationError>();
             if (amount < 0)
             {
                 errors.Add(new OperationError(OperationError.Error.ValueCannotBeNegative));
             }
-            return errors.Count == 0 ? OperationResult.Success() : OperationResult.Failed(errors.ToArray()); 
+            return errors.Count == 0 ? OperationResult.Success() : OperationResult.Failed(errors.ToArray());
         }
 
-        public OperationResult ValidateAmountForPayment(int balance, int amountToSubtract)
+        public OperationResult ValidateAmountForPayment(decimal balance, decimal amountToSubtract)
         {
             var errors = new List<OperationError>();
             var result = ValidateAmount(balance);
@@ -33,7 +33,7 @@ namespace ATM.Core.Validation
             return result;
         }
 
-        public OperationResult ValidateUserAccount(string userID, int accountNumber)
+        public OperationResult ValidateUserAccount(string userID, string accountNumber)
         {
             return OperationResult.Success();
         }

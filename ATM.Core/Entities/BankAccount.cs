@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ATM.Core.Entities
 {
     public class BankAccount
     {
         [Key]
-        public int AccountNumber { get; set; }
+        public string AccountNumber { get; set; }
 
-        public int Balance { get; set; }
+        public string AccountName { get; set; }
+
+        public decimal Balance { get; set; }
 
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
 
-        public string FullName
+        public string AccountHolder
         {
             get
             {

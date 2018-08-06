@@ -7,11 +7,11 @@
 
     foreach (var item in Model)
     {
-        <a href="@Url.Action("SelectAccount", new { @accountNumber = item.AccountID })">
+        <a href="@Url.Action("SelectAccount", new { @accountNumber = item.AccountNumber })">
             <div class="tile">
                 <h6 class="text-uppercase text-left accountsListItem">
                     <span>@item.AccountName</span>
-                    @item.AccountID
+                    @item.AccountNumber
                     <span class="fui-arrow-right icon"></span>
                 </h6>
             </div>

@@ -30,7 +30,11 @@ namespace ATM
                       "~/Content/main.min.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
-            "~/Assets/dist/js/flat-ui.min.js"));
+                      "~/Assets/dist/js/flat-ui.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/globalization").Include(
+                      "~/Scripts/globalize*",
+                      "~/Scripts/cldr*"));
         }
     }
 }

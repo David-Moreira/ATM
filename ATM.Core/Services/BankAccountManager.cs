@@ -2,6 +2,7 @@
 using ATM.Core.Interfaces;
 using ATM.Core.Interfaces.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ATM.Core.Services
@@ -20,13 +21,28 @@ namespace ATM.Core.Services
             if (String.IsNullOrEmpty(newAcc.UserID))
                 throw new Exception("No user associated with account.");
 
-            newAcc.AccountNumber = int.Parse(GetAll().Count().ToString().PadLeft(10, '0'));
+            newAcc.AccountNumber = GetAll().Count().ToString().PadLeft(15, '0');
             return base.Add(newAcc);
+        }
+
+        public decimal GetAccountBalance(string id)
+        {
+            return GetByAccountNumber(id).Balance;
+        }
+
+        public BankAccount GetByAccountNumber(string id)
+        {
+            return _bankAccountRepo.GetSingle(x => x.AccountNumber == id);
         }
 
         public BankAccount GetByUserId(string id)
         {
             return _bankAccountRepo.GetSingle(x => x.UserID == id);
+        }
+
+        public IEnumerable<BankAccount> GetMultipleByUserId(string id)
+        {
+            return _bankAccountRepo.GetMultiple(x => x.UserID == id);
         }
     }
 }

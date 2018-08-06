@@ -4,8 +4,10 @@ namespace ATM.Core.Interfaces.Validation
 {
     public interface IOperationValidator
     {
-        OperationResult ValidateUserAccount(string userID, int accountNumber);
-        OperationResult ValidateAmount(int amount);
-        OperationResult ValidateAmountForPayment(int balance, int amountToSubtract);
+        OperationResult ValidateUserAccount(string userID, string accountNumber);
+
+        OperationResult ValidateAmount(decimal amount);
+
+        OperationResult ValidateAmountForPayment(decimal balance, decimal amountToSubtract);
     }
 }

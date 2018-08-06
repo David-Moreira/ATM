@@ -6,6 +6,7 @@ using ATM.Core.Services;
 using ATM.Core.Validation;
 using ATM.Infrastructure.Data;
 using ATM.Infrastructure.Repositories;
+using ATM.Models;
 using Ninject;
 using Ninject.Web.Common.WebHost;
 using System.Web.Mvc;
@@ -56,6 +57,7 @@ namespace ATM
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
         }
     }
 }

@@ -4,6 +4,7 @@ using ATM.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -113,16 +114,30 @@ namespace ATM.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    _bankManager.Add(new BankAccount()
+                    try
                     {
-                        FirstName = model.FirstName,
-                        LastName = model.LastName,
-                        UserID = user.Id
-                    });
+                        _bankManager.Add(
+                            new BankAccount()
+                            {
+                                FirstName = model.FirstName,
+                                LastName = model.LastName,
+                                AccountName = model.AccountName,
+                                UserID = user.Id
+                            });
+                    }
+                    catch (System.Exception ex)
+                    {
+                        await UserManager.DeleteAsync(user);
+                        throw;
+                    }
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
@@ -190,6 +205,7 @@ namespace ATM.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session.Abandon();
             return RedirectToAction("Index", "Home");
         }
 

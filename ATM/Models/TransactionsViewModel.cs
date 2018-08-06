@@ -5,11 +5,12 @@ namespace ATM.Models
     public abstract class StandardTransactionViewModel
     {
         [Required]
-        [DataType(DataType.Currency)]
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
 
-        [Required]
-        public int accountNumber { get; set; }
+        //[Required]
+        [MinLength(length: 15, ErrorMessage = "Invalid Account, It should have 15 numbers.")]
+        [MaxLength(length: 15, ErrorMessage = "Invalid Account, It should have 15 numbers.")]
+        public string accountNumber { get; set; }
     }
 
     public class TransactionViewModel : StandardTransactionViewModel { } //Withdraw | Deposit
@@ -17,6 +18,8 @@ namespace ATM.Models
     public class TransferFundsViewModel : StandardTransactionViewModel //Transfer funds | Payment
     {
         [Required]
-        public int recipientAccountNumber { get; set; }
+        [MinLength(length: 15, ErrorMessage = "Invalid Destinatary Account, It should have 15 numbers.")]
+        [MaxLength(length: 15, ErrorMessage = "Invalid Destinatary Account, It should have 15 numbers.")]
+        public string recipientAccountNumber { get; set; }
     }
 }

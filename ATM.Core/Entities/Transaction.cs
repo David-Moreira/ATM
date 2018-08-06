@@ -8,10 +8,10 @@ namespace ATM.Core.Entities
 
         public string Amount { get; set; }
 
-        public int Recipient { get; set; }
+        public string Recipient { get; set; }
 
         [ForeignKey("BankAccount")]
-        public int AccountNumber { get; set; }
+        public string AccountNumber { get; set; }
 
         public virtual BankAccount BankAccount { get; set; }
     }

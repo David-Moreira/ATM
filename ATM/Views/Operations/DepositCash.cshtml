@@ -1,11 +1,9 @@
 ﻿@model ATM.Models.TransactionViewModel
 @{ViewBag.Title = "Deposit cash";}
 
-@using (Html.BeginForm("Deposit", "Operations", FormMethod.Post, new { @id = "depositForm" }))
+@using (Html.BeginForm("DepositCash", "Operations", FormMethod.Post, new { @id = "depositForm" }))
 {
     @Html.AntiForgeryToken()
-
-
     <div class="col-xs-6">
 
         <blockquote>Insert cash monies into slot labeled "Insert Cash" when light turns green. Click <strong>DONE</strong> to complete transaction.</blockquote>
@@ -15,10 +13,11 @@
         </div>
 
         <div class="tile">
-            <h4 class="text-uppercase"><div class="palette-clouds">Inserted Cash</div>@Html.TextBox("amount", null, "#.00", new { @class = "text-center apply-border", @type = "number" })</h4>
+            <h4 class="text-uppercase"><div class="palette-clouds">Inserted Cash</div>@Html.TextBoxFor(x => x.Amount, new { @class = "text-center apply-border" })</h4>
         </div>
 
-        <a id="done" href="javascript:document.getElementById('depositForm').submit()" class="btn btn-lg btn-success text-uppercase btn-padding" style="width:100%; margin-bottom:1rem;"><span class="fui-check"></span> Done</a>
+        <button id="done" type="submit" class="btn btn-lg btn-success text-uppercase btn-padding" style="width:100%; margin-bottom:1rem"><span class='fui-check'></span> Done</button>
+        @Html.ValidationSummary(false, "Please correct the following:", new { @class = "text-danger" })
     </div>
 
     <div class="col-xs-6" style="border:solid 1px #CCC; border-top:none; border-bottom:none;">

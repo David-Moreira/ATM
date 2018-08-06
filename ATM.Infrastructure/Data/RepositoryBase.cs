@@ -41,6 +41,20 @@ namespace ATM.Infrastructure.Data
             return item;
         }
 
+        public virtual IEnumerable<T> GetMultiple(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties)
+        {
+            IEnumerable<T> item = null;
+
+            IQueryable<T> dbQuery = _dbContext.Set<T>();
+
+            foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
+                dbQuery = dbQuery.Include<T, object>(navigationProperty);
+
+            item = dbQuery.Where(where);
+
+            return item;
+        }
+
         public IEnumerable<T> GetAll()
         {
             return _dbContext.Set<T>().ToList();

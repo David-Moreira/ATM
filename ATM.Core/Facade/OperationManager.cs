@@ -15,7 +15,6 @@ namespace ATM.Core.Facade
         private BankAccount _bankAccount;
         private Transaction _transaction;
 
-
         public OperationManager(IBankAccountService bankManager, ITransactionService transactionManager, IOperationValidator operationValidator)
         {
             _operationValidator = operationValidator;
@@ -25,13 +24,13 @@ namespace ATM.Core.Facade
         }
 
         //Have to rethink this with transactions
-        public OperationResult Deposit(int accountNumber, int amount)
+        public OperationResult Deposit(string accountNumber, decimal amount)
         {
             var result = _operationValidator.ValidateAmount(amount);
             if (!result.Succeeded)
                 return result;
 
-            _bankAccount = _bankManager.GetById(accountNumber);
+            _bankAccount = _bankManager.GetByAccountNumber(accountNumber);
             _bankAccount.Balance += amount;
             _transaction.AccountNumber = accountNumber;
 
@@ -43,10 +42,10 @@ namespace ATM.Core.Facade
             return result;
         }
 
-        public OperationResult Payment(int accountNumber, int recipientAccountNumber, int amount)
+        public OperationResult Payment(string accountNumber, string recipientAccountNumber, decimal amount)
         {
-            _bankAccount = _bankManager.GetById(accountNumber);
-            var recipientAcc = _bankManager.GetById(recipientAccountNumber);
+            _bankAccount = _bankManager.GetByAccountNumber(accountNumber);
+            var recipientAcc = _bankManager.GetByAccountNumber(recipientAccountNumber);
 
             var result = _operationValidator.ValidateAmountForPayment(_bankAccount.Balance, amount);
             if (!result.Succeeded)
@@ -72,18 +71,17 @@ namespace ATM.Core.Facade
             _transactionManager.Add(recipientTransaction);
 
             return result;
-
         }
 
-        public string PrintStatement(int accountNumber)
+        public string PrintStatement(string accountNumber)
         {
-            _bankAccount = _bankManager.GetById(accountNumber);
-            return string.Format("Conta: {0} \nFull Name: {1}\nBalance: {2}", _bankAccount.AccountNumber, _bankAccount.FullName, _bankAccount.Balance);
+            _bankAccount = _bankManager.GetByAccountNumber(accountNumber);
+            return string.Format("Conta: {0} \nFull Name: {1}\nBalance: {2}", _bankAccount.AccountNumber, _bankAccount.AccountHolder, _bankAccount.Balance);
         }
 
-        public OperationResult QuickCash(int accountNumber)
+        public OperationResult QuickCash(string accountNumber)
         {
-            _bankAccount = _bankManager.GetById(accountNumber);
+            _bankAccount = _bankManager.GetByAccountNumber(accountNumber);
 
             var result = _operationValidator.ValidateAmountForPayment(_bankAccount.Balance, 10);
             if (!result.Succeeded)
@@ -101,11 +99,10 @@ namespace ATM.Core.Facade
             return result;
         }
 
-        public OperationResult TransferFunds(int accountNumber, int recipientAccountNumber, int amount)
+        public OperationResult TransferFunds(string accountNumber, string recipientAccountNumber, decimal amount)
         {
-            _bankAccount = _bankManager.GetById(accountNumber);
-            var recipientAcc = _bankManager.GetById(recipientAccountNumber);
-
+            _bankAccount = _bankManager.GetByAccountNumber(accountNumber);
+            var recipientAcc = _bankManager.GetByAccountNumber(recipientAccountNumber);
 
             var result = _operationValidator.ValidateAmountForPayment(_bankAccount.Balance, amount);
             if (!result.Succeeded)
@@ -129,12 +126,11 @@ namespace ATM.Core.Facade
             _transactionManager.Add(_transaction);
             _transactionManager.Add(recipientTransaction);
             return result;
-
         }
 
-        public OperationResult Withdraw(int accountNumber, int amount)
+        public OperationResult Withdraw(string accountNumber, decimal amount)
         {
-            _bankAccount = _bankManager.GetById(accountNumber);
+            _bankAccount = _bankManager.GetByAccountNumber(accountNumber);
 
             var result = _operationValidator.ValidateAmountForPayment(_bankAccount.Balance, amount);
             if (!result.Succeeded)
@@ -149,7 +145,6 @@ namespace ATM.Core.Facade
             _bankManager.Update(_bankAccount);
             _transactionManager.Add(_transaction);
             return result;
-
         }
     }
 }

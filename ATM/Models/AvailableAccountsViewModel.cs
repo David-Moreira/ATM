@@ -7,7 +7,9 @@ namespace ATM.Models
 {
     public class AvailableAccountsViewModel
     {
-        public int AccountID { get; set; }
+        public string AccountNumber { get; set; }
         public string AccountName { get; set; }
+        public decimal AccountBalance { get; set; }
+        public string AccountHolder { get; set; }
     }
 }

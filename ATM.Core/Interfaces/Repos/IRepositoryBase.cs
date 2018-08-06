@@ -10,6 +10,8 @@ namespace ATM.Core.Interfaces
 
         T GetSingle(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties);
 
+        IEnumerable<T> GetMultiple(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties);
+
         IEnumerable<T> GetAll();
 
         T Add(T entity);

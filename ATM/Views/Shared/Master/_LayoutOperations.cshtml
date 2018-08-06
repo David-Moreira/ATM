@@ -20,6 +20,7 @@
                 <div class="col-xs-3">
                     <br />
                     <br />
+                    <br />
                     <div id="BackButton">
                     </div>
 
@@ -38,10 +39,39 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/js")
+
+    <script src="/Scripts/cldr/cldr.js"></script>
+    <script src="/Scripts/cldr/event.js"></script>
+    <script src="/Scripts/cldr/supplemental.js"></script>
+    <!--
+    Next, we load Globalize and its modules. Note they are already available on
+    this repository. If it's not, read Usage on Getting Started on the root's
+    README.md.
+    -->
+    <script src="/Scripts/globalize/globalize.js"></script>
+    <script src="/Scripts/globalize/message.js"></script>
+    <script src="/Scripts/globalize/number.js"></script>
+    <script src="/Scripts/globalize/plural.js"></script>
+    <!-- Load aftScripts/er globalize/number.js -->
+    <script src="/Scripts/globalize/date.js"></script>
+    <script src="/Scripts/globalize/currency.js"></script>
+    <!-- Load aftScripts/er globalize/number.js and globalize/plural.js-->
+    <script src="/Scripts/globalize/relative-time.js"></script>
+    <script src="/Scripts/globalize/unit.js"></script>
+
     <script type="text/javascript">
         var isIndex = document.querySelector("#IndexView");
         if (isIndex == null) {
             $("#BackButton").load('@Url.Action("BackButton", "Operations")');
+        }
+    </script>
+
+    <script type="text/javascript">
+        $.validator.methods.number = function (value, element) {
+            return this.optional(element) || !isNaN(parseFloat(value));
+        }
+        $.validator.methods.range = function (value, element, param) {
+            return this.optional(element) || (parseFloat(value) >= param[0] && parseFloat(value) <= param[1]);
         }
     </script>
     @RenderSection("scripts", required: false)
