@@ -511,6 +511,7 @@
     <Content Include="Views\Operations\DepositCheck.cshtml" />
     <Content Include="Views\Operations\AccountOperations.cshtml" />
     <Content Include="Views\Shared\_ErrorDisplay.cshtml" />
+    <Content Include="Views\Operations\CreateBankAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808061549112_FirstMigrationForIdentity.resx">

@@ -1,9 +1,32 @@
 ﻿@model IEnumerable<ATM.Models.AvailableAccountsViewModel>
 @{ViewBag.Title = "Available Accounts";}
 
-@using (Html.BeginForm())
+
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    CREATE NEW BANK ACCOUNT
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                @{Html.RenderPartial("CreateBankAccount", new ATM.Models.BankAccountViewModel()); }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@using (@Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+
+
 
     foreach (var item in Model)
     {

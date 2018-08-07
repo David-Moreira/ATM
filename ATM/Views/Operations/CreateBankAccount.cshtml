@@ -1,0 +1,40 @@
+﻿@model ATM.Models.BankAccountViewModel
+
+@using (Html.BeginForm("CreateBankAccount", "Operations", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+<div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.AccountName, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
+            @Html.TextBoxFor(x => x.AccountName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(x => x.FirstName, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
+
+            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.LastName, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
+
+            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            <input type="submit" value="Create Account" class="pull-right" />
+        </div>
+    </div>
+</div>
+}

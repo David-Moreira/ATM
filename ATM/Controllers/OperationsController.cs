@@ -77,6 +77,17 @@ namespace ATM.Controllers
         }
 
         [HttpPost]
+        public ActionResult CreateBankAccount(BankAccountViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _bankManager.Add(new BankAccount() { AccountName = model.AccountName, UserID = User.Identity.GetUserId() });
+                return View("Success");
+            }
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult DepositCash(TransactionViewModel transaction)
         {
             if (ModelState.IsValid)
