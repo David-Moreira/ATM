@@ -193,10 +193,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ATm_Changes.mdf" />
-    <Content Include="App_Data\ATm_Changes_log.ldf">
-      <DependentUpon>ATm_Changes.mdf</DependentUpon>
-    </Content>
     <Content Include="Assets\dist\css\flat-ui.css" />
     <Content Include="Assets\dist\css\flat-ui.min.css">
       <DependentUpon>flat-ui.css</DependentUpon>
@@ -530,6 +526,9 @@
       <Project>{fc7ad430-5358-4a8c-8469-7302fceed1f9}</Project>
       <Name>ATM.Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
