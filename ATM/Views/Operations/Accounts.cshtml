@@ -5,8 +5,10 @@
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingOne">
             <h4 class="panel-title">
-                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    CREATE NEW BANK ACCOUNT
+
+                <a id="lnkCreateAccount" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+
+                    CREATE NEW BANK ACCOUNT                    <span class="glyphicon glyphicon-chevron-down icon pull-right account-collapser"></span>
                 </a>
             </h4>
         </div>
@@ -85,8 +87,10 @@
 
         let accountsCollapser = document.querySelectorAll(".account-collapser");
         accountsCollapser.forEach((item) => {
-            console.log(item);
             item.addEventListener("click", changeIcon);
         });
+
+        let lnkCreateAccount = document.querySelector("#lnkCreateAccount");
+        lnkCreateAccount.addEventListener("click", function () { this.querySelector("span").click(); });
     </script>
 }

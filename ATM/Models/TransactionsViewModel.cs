@@ -5,6 +5,7 @@ namespace ATM.Models
     public abstract class StandardTransactionViewModel
     {
         [Required]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:C}")]
         public decimal Amount { get; set; }
 
         //[Required]

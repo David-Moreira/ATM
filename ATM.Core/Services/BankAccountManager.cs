@@ -21,7 +21,11 @@ namespace ATM.Core.Services
             if (String.IsNullOrEmpty(newAcc.UserID))
                 throw new Exception("No user associated with account.");
 
-            newAcc.AccountNumber = (int.Parse(GetAll().LastOrDefault().AccountNumber) + 1).ToString().PadLeft(15, '0');
+            var accountExists = GetAll().LastOrDefault();
+            if (accountExists != null)
+                newAcc.AccountNumber = (int.Parse(accountExists.AccountNumber) + 1).ToString().PadLeft(15, '0');
+            else
+                newAcc.AccountNumber = ("1").PadLeft(15, '0');
             return base.Add(newAcc);
         }
 

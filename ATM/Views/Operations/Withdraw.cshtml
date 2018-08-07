@@ -1,45 +1,45 @@
 ﻿@model ATM.Models.TransactionViewModel
 @{ViewBag.Title = "Withdraw";}
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Withdraw", "Operations", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
     <div class="row">
         <div class="col-xs-4">
             <div class="tile">
-                <a id="qc20" href="#" class="btn btn-lg btn-primary text-uppercase btn-padding">&#36; 20.00</a>
+                <a id="btn20" class="btn btn-lg btn-primary text-uppercase btn-padding">20.00 €</a>
             </div>
 
             <div class="tile">
-                <a id="qc40" href="#" class="btn btn-lg btn-primary text-uppercase btn-padding">&#36; 40.00</a>
+                <a id="btn80" class="btn btn-lg btn-primary text-uppercase btn-padding">80.00 €</a>
             </div>
         </div>
         <div class="col-xs-4">
             <div class="tile">
-                <a id="qc60" href="#" class="btn btn-lg btn-primary text-uppercase btn-padding">&#36; 60.00</a>
+                <a id="btn40" class="btn btn-lg btn-primary text-uppercase btn-padding">40.00 €</a>
             </div>
 
             <div class="tile">
-                <a id="qc80" href="#" class="btn btn-lg btn-primary text-uppercase btn-padding">&#36; 80.00</a>
+                <a id="btn100" class="btn btn-lg btn-primary text-uppercase btn-padding">100.00 €</a>
             </div>
         </div>
 
         <div class="col-xs-4">
             <div class="tile">
-                <a id="qc100" href="#" class="btn btn-lg btn-primary text-uppercase btn-padding">&#36; 100.00</a>
+                <a id="btn60" class="btn btn-lg btn-primary text-uppercase btn-padding">60.00 €</a>
             </div>
 
             <div class="tile">
-                <a id="qc200" href="#" class="btn btn-lg btn-primary text-uppercase btn-padding">&#36; 200.00</a>
+                <a id="btn200" class="btn btn-lg btn-primary text-uppercase btn-padding">200.00 €</a>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
             <h6>Click a button to get that amount of cash.</h6>
-            <h5>or input a multiple of $20. Must be lower than $500</h5>
-            <input type="text" id="qcCustomNumber" class="form-control" placeholder="20.00" disabled />
+            <h5>or input a multiple of 20 €. Must be lower than 500 €.</h5>
+            @Html.TextBoxFor(m => m.Amount, "{0:c}", new { @id = "moneyInput", @class = "form-control", @readonly = "readonly" })
             <div id="pinPad">
                 <table>
                     <tr>
@@ -48,7 +48,7 @@
                         <td><a id="btn3" href="#" class="btn btn-block btn-lg btn-inverse">3</a></td>
                         <td><a id="btn4" href="#" class="btn btn-block btn-lg btn-inverse">4</a></td>
                         <td><a id="btn5" href="#" class="btn btn-block btn-lg btn-inverse">5</a></td>
-                        <td colspan="2"><a id="btnConfirm" href="#" class="btn btn-block btn-lg btn-primary text-uppercase">Confirm</a></td>
+                        <td colspan="2"><input type="submit" id="btnConfirm" href="#" class="btn btn-block btn-lg btn-primary text-uppercase" value="Confirm" /></td>
                     </tr>
                     <tr>
                         <td><a id="btn6" href="#" class="btn btn-block btn-lg btn-inverse">6</a></td>
@@ -56,10 +56,38 @@
                         <td><a id="btn8" href="#" class="btn btn-block btn-lg btn-inverse">8</a></td>
                         <td><a id="btn9" href="#" class="btn btn-block btn-lg btn-inverse">9</a></td>
                         <td><a id="btn0" href="#" class="btn btn-block btn-lg btn-inverse">0</a></td>
-                        <td colspan="2"><a id="btnDelete" href="#" class="btn btn-block btn-lg btn-default text-uppercase">Clear</a></td>
+                        <td colspan="2"><a id="btnClear" href="#" class="btn btn-block btn-lg btn-default text-uppercase">Clear</a></td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
+}
+@section scripts{
+
+    <script type="text/javascript">
+        let btnArray = [];
+        let btnClear = document.querySelector("#btnClear");
+        let userInput = document.querySelector("#moneyInput");
+
+        for (let i = 0; i < 10; i++) {
+            document.querySelector("#btn" + i).addEventListener("click", () => userInput.value += i);
+        }
+
+        for (let i = 1; i < 6; i++) {
+            let value = i * 20;
+            document.querySelector("#btn" + value).addEventListener("click", () => userInput.value = parseFloat(value).toFixed(2));
+        }
+        document.querySelector("#btn200").addEventListener("click", () => userInput.value = parseFloat(200).toFixed(2));
+
+        btnClear.addEventListener("click", () => userInput.value = "");
+
+                                                                    //document.querySelector("#moneyInput").addEventListener("onchange", inputValidator);
+
+                                                                    //function inputValidator(item) {
+                                                                    //    let el = item.srcElement;
+                                                                    //    el.value = parseFloat(el);
+                                                                    //}
+    </script>
+
 }

@@ -11,6 +11,11 @@
     display: inline-block;
     width: 20em;
 }
+
+#moneyInput {
+    color: black;
+    font-weight: bold;
+}
 /* Helpers */
 .no-margin {
     margin: 0px;
