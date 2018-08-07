@@ -188,12 +188,19 @@ namespace ATM.Controllers
         }
 
         [HttpPost]
-        public ActionResult Withdraw(TransactionViewModel transactionModel)
+        public ActionResult Withdraw(TransactionViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _operationsManager.Withdraw(GetAccountNumber(), transactionModel.Amount);
-                return View("Index");
+                if (model.Amount > 0 && model.Amount < 500 && model.Amount % 20 == 0)
+                {
+                    _operationsManager.Withdraw(GetAccountNumber(), model.Amount);
+                    return View("Success");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Value must be between 0 and 500 and a multiple of 20.");
+                }
             }
             return View();
         }

@@ -1,7 +1,7 @@
 ﻿@model ATM.Models.TransactionViewModel
 @{ViewBag.Title = "Withdraw";}
 
-@using (Html.BeginForm("Withdraw", "Operations", FormMethod.Post))
+@using (Html.BeginForm("Withdraw", "Operations", FormMethod.Post, new { id = "WithdrawForm" }))
 {
     @Html.AntiForgeryToken()
 
@@ -62,6 +62,10 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        @Html.ValidationSummary(true, "Please verify the following errors:", new { @class = "text-danger" })
+    </div>
 }
 @section scripts{
 
@@ -76,18 +80,25 @@
 
         for (let i = 1; i < 6; i++) {
             let value = i * 20;
-            document.querySelector("#btn" + value).addEventListener("click", () => userInput.value = parseFloat(value).toFixed(2));
+            document.querySelector("#btn" + value).addEventListener("click", () => {
+                userInput.value = parseFloat(value).toFixed(2);
+                document.getElementById('WithdrawForm').submit();
+            });
+
         }
-        document.querySelector("#btn200").addEventListener("click", () => userInput.value = parseFloat(200).toFixed(2));
+        document.querySelector("#btn200").addEventListener("click", () => {
+            userInput.value = parseFloat(200).toFixed(2);
+            document.getElementById('WithdrawForm').submit();
+        });
 
         btnClear.addEventListener("click", () => userInput.value = "");
 
-                                                                    //document.querySelector("#moneyInput").addEventListener("onchange", inputValidator);
+                                            //document.querySelector("#moneyInput").addEventListener("onchange", inputValidator);
 
-                                                                    //function inputValidator(item) {
-                                                                    //    let el = item.srcElement;
-                                                                    //    el.value = parseFloat(el);
-                                                                    //}
+                                            //function inputValidator(item) {
+                                            //    let el = item.srcElement;
+                                            //    el.value = parseFloat(el);
+                                            //}
     </script>
 
 }
