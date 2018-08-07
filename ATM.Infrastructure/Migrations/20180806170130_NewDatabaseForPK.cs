@@ -7,11 +7,7 @@ namespace ATM.Infrastructure.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Transactions");
-
-            migrationBuilder.DropTable(
-                name: "BankAccounts");
+            Down(migrationBuilder);
 
             migrationBuilder.CreateTable(
                 name: "BankAccounts",
