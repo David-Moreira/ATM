@@ -29,7 +29,6 @@
 
                     }
                 </div>
-                @{Html.RenderPartial("_ErrorDisplay"); }
             </div>
         </div>
     </div>
@@ -39,26 +38,6 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/js")
-
-    <script src="/Scripts/cldr/cldr.js"></script>
-    <script src="/Scripts/cldr/event.js"></script>
-    <script src="/Scripts/cldr/supplemental.js"></script>
-    <!--
-    Next, we load Globalize and its modules. Note they are already available on
-    this repository. If it's not, read Usage on Getting Started on the root's
-    README.md.
-    -->
-    <script src="/Scripts/globalize/globalize.js"></script>
-    <script src="/Scripts/globalize/message.js"></script>
-    <script src="/Scripts/globalize/number.js"></script>
-    <script src="/Scripts/globalize/plural.js"></script>
-    <!-- Load aftScripts/er globalize/number.js -->
-    <script src="/Scripts/globalize/date.js"></script>
-    <script src="/Scripts/globalize/currency.js"></script>
-    <!-- Load aftScripts/er globalize/number.js and globalize/plural.js-->
-    <script src="/Scripts/globalize/relative-time.js"></script>
-    <script src="/Scripts/globalize/unit.js"></script>
-
     <script type="text/javascript">
         var isIndex = document.querySelector("#IndexView");
         if (isIndex == null) {

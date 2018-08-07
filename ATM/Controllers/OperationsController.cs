@@ -84,6 +84,7 @@ namespace ATM.Controllers
                 _operationsManager.Deposit(GetAccountNumber(), transaction.Amount);
                 return View("Success");
             }
+            ViewBag.AccountBalance = _bankManager.GetByAccountNumber(GetAccountNumber()).Balance;
             return View();
         }
 
@@ -95,6 +96,7 @@ namespace ATM.Controllers
                 _operationsManager.Deposit(GetAccountNumber(), transaction.Amount);
                 return View("Success");
             }
+            ViewBag.AccountBalance = _bankManager.GetByAccountNumber(GetAccountNumber()).Balance;
             return View();
         }
 
