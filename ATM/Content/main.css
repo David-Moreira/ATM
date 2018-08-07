@@ -1,20 +1,44 @@
-﻿/* Operations */
-.operations-content a:hover{
-    color:#34495E;
-    font-weight:600;
-}
-ul li
-{
-    line-height:normal;
-    font-size:16px;
+﻿a[disabled], a[disabled]:hover {
+    pointer-events: none;
+    color: #e1e1e1;
 }
 
-.operations-content .tile{
-    cursor:default;
+.panel-heading.active {
+    background-color: lightgray;
 }
+
+.accountsListItem > a:first-child {
+    display: inline-block;
+    width: 20em;
+}
+/* Helpers */
+.no-margin {
+    margin: 0px;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+/* EndHelpers */
+
+/* Operations */
+.operations-content a:hover {
+    color: #34495E;
+    font-weight: 600;
+}
+
+ul li {
+    line-height: normal;
+    font-size: 16px;
+}
+
+.operations-content .tile {
+    cursor: default;
+}
+
 .operations-content .tile-option:hover {
     background-color: #e3ecfe;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 /* EndOperations*/
@@ -224,12 +248,8 @@ body {
     color: #34495e;
 }
 
-.no-margin{
-    margin:0px;
-}
-
-input{
-    max-width:100%;
+input {
+    max-width: 100%;
 }
 
 .apply-border {

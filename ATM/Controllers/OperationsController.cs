@@ -81,7 +81,7 @@ namespace ATM.Controllers
         {
             if (ModelState.IsValid)
             {
-                _bankManager.Add(new BankAccount() { AccountName = model.AccountName, UserID = User.Identity.GetUserId() });
+                _bankManager.Add(new BankAccount() { AccountName = model.AccountName, UserID = User.Identity.GetUserId(), FirstName = model.FirstName, LastName = model.LastName });
                 return View("Success");
             }
             return View();

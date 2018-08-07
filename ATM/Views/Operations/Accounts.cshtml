@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<ATM.Models.AvailableAccountsViewModel>
 @{ViewBag.Title = "Available Accounts";}
 
-
-
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingOne">
@@ -15,30 +13,80 @@
         <div id="collapseOne" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="headingOne">
             <div class="panel-body">
                 @{Html.RenderPartial("CreateBankAccount", new ATM.Models.BankAccountViewModel()); }
-
             </div>
         </div>
     </div>
 </div>
 
-
 @using (@Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-
-
     foreach (var item in Model)
     {
-        <a href="@Url.Action("SelectAccount", new { @accountNumber = item.AccountNumber })">
-            <div class="tile">
-                <h6 class="text-uppercase text-left accountsListItem">
-                    <span>@item.AccountName</span>
-                    @item.AccountNumber
-                    <span class="fui-arrow-right icon"></span>
-                </h6>
+        var isActive = item.AccountNumber == Session["AccountNumber"].ToString() ? "active" : "";
+
+        <div class="panel-group" id="accordion-account" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class='panel-heading @isActive ' role="tab" id="heading-account">
+                    <h6 class="text-uppercase text-left accountsListItem">
+                        <a href="@Url.Action("SelectAccount", new { @accountNumber = item.AccountNumber })">
+                            <span>@item.AccountName</span>
+                        </a>
+                        @item.AccountNumber
+                        <a class="glyphicon glyphicon-chevron-down icon pull-right account-collapser" data-toggle="collapse" data-parent="#accordion-account" href="#collapseAccount-@item.AccountNumber" aria-expanded="true" aria-controls="collapseAccount"></a>
+                    </h6>
+                </div>
+
+                <div id="collapseAccount-@item.AccountNumber" class='panel-collapse collapse out' role="tabpanel" aria-labelledby="heading-account">
+                    <div class="panel-body">
+                        <div class="row">
+                            @Html.LabelFor((x => x.FirstOrDefault().AccountHolder), new { @class = "col-md-3 text-bold" })
+                            <label class="col-md-9">
+                                @item.AccountHolder
+                            </label>
+                        </div>
+                        <div class="row">
+                            @Html.LabelFor(x => x.FirstOrDefault().AccountBalance, new { @class = "col-md-3 text-bold" })
+                            <label class="col-md-9">
+                                @item.AccountBalance
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </a>
+        </div>
+
     }
 
+}
+
+@section scripts{
+    <script type="text/javascript">
+
+        function changeIcon(event) {
+            let el = event.srcElement;
+
+            if (el.classList.contains("glyphicon-chevron-down")) {
+                el.classList.remove("glyphicon-chevron-down");
+                el.classList.add("glyphicon-chevron-up");
+            }
+            else {
+                el.classList.add("glyphicon-chevron-down");
+                el.classList.remove("glyphicon-chevron-up");
+            }
+
+            el.setAttribute("disabled", "disabled");
+            setTimeout(function () {
+                el.removeAttribute("disabled", "disabled");
+            }, 400);
+
+        }
+
+        let accountsCollapser = document.querySelectorAll(".account-collapser");
+        accountsCollapser.forEach((item) => {
+            console.log(item);
+            item.addEventListener("click", changeIcon);
+        });
+    </script>
 }
