@@ -1,4 +1,5 @@
-﻿@{ViewBag.Title = "Transfer Funds";}
+﻿@model IEnumerable<ATM.Models.AvailableAccountsViewModel>
+@{ViewBag.Title = "Transfer Funds";}
 <div class="col-xs-12">
     <blockquote>Transfer funds from one account to another. You can type in a routing number of another account that is not in your available accounts. </blockquote>
 </div>
@@ -6,7 +7,7 @@
     <div class="tile">
         <h5>From:</h5>
 
-        <button data-toggle="modal" data-target="#fromAccount" class="btn btn-block btn-lg btn-inverse"><h6>@Session["AccountNumber"]</h6></button>
+        <button data-toggle="modal" data-target="#fromAccount" class="btn btn-block btn-lg btn-inverse"><h6 id="mainFromAccount">@Session["AccountNumber"]</h6></button>
     </div>
 </div>
 
@@ -14,7 +15,7 @@
     <div class="tile">
         <h5>To:</h5>
 
-        <button data-toggle="modal" data-target="#toAccount" class="btn btn-block btn-lg btn-inverse"><h6>&nbsp;</h6></button>
+        <button data-toggle="modal" data-target="#toAccount" class="btn btn-block btn-lg btn-inverse"><h6 id="mainToAccount">&nbsp;</h6></button>
     </div>
 </div>
 <div class="col-xs-12">
@@ -33,18 +34,10 @@
                 <h4 class="modal-title" id="myModalLabel">Available Accounts</h4>
             </div>
             <div class="modal-body">
-                <!-- Available Accounts -->
 
                 <p>Select from an available account below.</p>
 
-                <a href="#" class="btn btn-block btn-lg btn-inverse text-uppercase modalList">
-                    <p>
-                        <span>PlaceHolder</span>
-                        ###############
-                    </p>
-                </a>
-
-                <!-- // END Available Accounts -->
+                <div id="divFromAccounts"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -68,13 +61,8 @@
                 <button type="button" class="btn btn-primary text-uppercase routingButton">Use Routing Number</button>
                 <p>or select from an available account below.</p>
 
-                <a href="#" class="btn btn-block btn-lg btn-inverse text-uppercase modalList">
-                    <p>
-                        <span>PlaceHolder</span>
-                        ###############
-                    </p>
-                </a>
-
+                <div id="divToAccounts">
+                </div>
                 <!-- // END Available Accounts -->
             </div>
             <div class="modal-footer">
@@ -83,3 +71,107 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script type="text/javascript">
+        function SelectFromAccount(event) {
+            let el = event.srcElement;
+
+            let accountNumber = el;
+            if (el.id != "txtAccountNumber") {
+                accountNumber = el.offsetParent.querySelector("#txtAccountNumber")
+            }
+
+            let fromAccount = document.querySelector("#mainFromAccount");
+            let tempAccHolder = fromAccount.textContent;
+            fromAccount.textContent = accountNumber.textContent;
+            accountNumber.textContent = tempAccHolder;
+            $(".modal").modal('hide');
+            BindAccounts("From");
+        }
+
+        function SelectToAccount(event) {
+            let el = event.srcElement;
+
+            let accountNumber = el;
+            if (el.id != "txtAccountNumber") {
+                accountNumber = el.offsetParent.querySelector("#txtAccountNumber")
+            }
+
+            let ToAccount = document.querySelector("#mainToAccount");
+            let tempAccHolder = ToAccount.textContent;
+            ToAccount.textContent = accountNumber.textContent;
+            accountNumber.textContent = tempAccHolder;
+            $(".modal").modal('hide');
+            BindAccounts("To");
+        }
+    </script>
+
+    <script type="text/javascript">
+        var globalUserAccounts;
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    globalUserAccounts = JSON.parse(xhttp.responseText);
+                    BindAccounts("From");
+                    BindAccounts("To");
+                }
+                else if (this.readyState == 4 && this.status != 200) {
+                    console.log("Failed: ", xhttp.responseText);
+                }
+            };
+            xhttp.open("GET", "GetUserAvailableAccounts", true);
+            xhttp.send();
+
+        });
+
+        function BindAccounts(FromOrTo) {
+
+            let divAccounts;
+            let currentAcc;
+            let clickFunction;
+            if (FromOrTo == "From") {
+                divAccounts = document.querySelector("#divFromAccounts");
+                currentAcc = document.querySelector("#mainFromAccount");
+                clickFunction = SelectFromAccount;
+            } else if (FromOrTo == "To") {
+                divAccounts = document.querySelector("#divToAccounts");
+                currentAcc = document.querySelector("#mainToAccount");
+                clickFunction = SelectToAccount;
+            }
+            else {
+                console.log("Dev: Please define parameter for BindAccountsFunction.");
+                return;
+            }
+
+            divAccounts.innerHTML = "";
+
+            globalUserAccounts.forEach(function (account) {
+                if (currentAcc.textContent != account.AccountNumber) {
+                    let anchor = document.createElement('a');
+                    anchor.href = "javascript:void(0)";
+                    anchor.classList.add("btn", "btn-block", "btn-lg", "btn-inverse", "text-uppercase", "modalList");
+                    anchor.onclick = clickFunction;
+
+                    let para = document.createElement('p');
+
+                    let spanAccountName = document.createElement('span');
+                    spanAccountName.id = "txtAccountName";
+                    spanAccountName.textContent = account.AccountName;
+
+                    let spanAccountNumber = document.createElement('span');
+                    spanAccountNumber.id = "txtAccountNumber";
+                    spanAccountNumber.textContent = account.AccountNumber;
+
+                    para.appendChild(spanAccountName);
+                    para.appendChild(spanAccountNumber);
+                    anchor.appendChild(para);
+                    divAccounts.appendChild(anchor);
+                }
+            });
+        }
+    </script>
+}

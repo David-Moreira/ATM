@@ -47,21 +47,7 @@ namespace ATM.Controllers
         [HttpGet]
         public ActionResult Accounts()
         {
-            List<AvailableAccountsViewModel> availableAccounts = new List<AvailableAccountsViewModel>();
-            IEnumerable<BankAccount> bankAccounts = _bankManager.GetMultipleByUserId(User.Identity.GetUserId());
-            foreach (var account in bankAccounts)
-            {
-                availableAccounts.Add(
-                    new AvailableAccountsViewModel()
-                    {
-                        AccountNumber = account.AccountNumber,
-                        AccountName = account.AccountName,
-                        AccountBalance = account.Balance,
-                        AccountHolder = account.AccountHolder
-                    }
-                );
-            }
-            return View(availableAccounts);
+            return View(GetAvailableAccounts());
         }
 
         public ActionResult BackButton()
@@ -167,7 +153,7 @@ namespace ATM.Controllers
         [HttpGet]
         public ActionResult TransferFunds()
         {
-            return View();
+            return View(GetAvailableAccounts());
         }
 
         [HttpPost]
@@ -194,8 +180,10 @@ namespace ATM.Controllers
             {
                 if (model.Amount > 0 && model.Amount < 500 && model.Amount % 20 == 0)
                 {
-                    _operationsManager.Withdraw(GetAccountNumber(), model.Amount);
-                    return View("Success");
+                    var result = _operationsManager.Withdraw(GetAccountNumber(), model.Amount);
+                    if (result.Succeeded)
+                        return View("Success");
+                    AddErrors(result);
                 }
                 else
                 {
@@ -212,6 +200,32 @@ namespace ATM.Controllers
                 string userID = User.Identity.GetUserId();
                 SetAccountNumber(_bankManager.GetByUserId(userID).AccountNumber);
             }
+        }
+
+        [HttpGet]
+        public ActionResult GetUserAvailableAccounts()
+        {
+            List<AvailableAccountsViewModel> availableAccounts = GetAvailableAccounts();
+            return Json(availableAccounts, JsonRequestBehavior.AllowGet);
+        }
+
+        private List<AvailableAccountsViewModel> GetAvailableAccounts()
+        {
+            List<AvailableAccountsViewModel> availableAccounts = new List<AvailableAccountsViewModel>();
+            IEnumerable<BankAccount> bankAccounts = _bankManager.GetMultipleByUserId(User.Identity.GetUserId());
+            foreach (var account in bankAccounts)
+            {
+                availableAccounts.Add(
+                    new AvailableAccountsViewModel()
+                    {
+                        AccountNumber = account.AccountNumber,
+                        AccountName = account.AccountName,
+                        AccountBalance = account.Balance,
+                        AccountHolder = account.AccountHolder
+                    }
+                );
+            }
+            return availableAccounts;
         }
 
         private void AddErrors(OperationResult result)
