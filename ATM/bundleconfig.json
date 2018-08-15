@@ -22,5 +22,11 @@
     "inputFiles": [
       "Assets/dist/js/flat-ui.js"
     ]
+  },
+  {
+    "outputFileName": "Scripts/main.min.js",
+    "inputFiles": [
+      "Scripts/main.js"
+    ]
   }
 ]

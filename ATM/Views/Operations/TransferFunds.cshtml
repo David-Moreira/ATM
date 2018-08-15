@@ -58,7 +58,7 @@
                 <!-- Available Accounts -->
                 <p>Input Routing Number</p>
                 <input type="text" id="toAccountCustom" class="form-control" />
-                <button type="button" class="btn btn-primary text-uppercase routingButton">Use Routing Number</button>
+                <button type="button" id="btnRouteNumber" class="btn btn-primary text-uppercase routingButton">Use Routing Number</button>
                 <p>or select from an available account below.</p>
 
                 <div id="divToAccounts">
@@ -73,7 +73,7 @@
 </div>
 
 @section scripts{
-    <script type="text/javascript">
+    <script id="functions" type="text/javascript">
         function SelectFromAccount(event) {
             let el = event.srcElement;
 
@@ -105,28 +105,22 @@
             $(".modal").modal('hide');
             BindAccounts("To");
         }
-    </script>
 
-    <script type="text/javascript">
-        var globalUserAccounts;
+        function ValidAccount(number) {
+            let toAccount = document.querySelector("#mainToAccount");
+            toAccount.textContent = number;
+            $(".modal").modal('hide');
+        }
 
-        document.addEventListener("DOMContentLoaded", function () {
+        function InvalidAccount() {
+            alert("We could not find the account on our system. Please insert a valid account.");
+        }
 
-            let xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    globalUserAccounts = JSON.parse(xhttp.responseText);
-                    BindAccounts("From");
-                    BindAccounts("To");
-                }
-                else if (this.readyState == 4 && this.status != 200) {
-                    console.log("Failed: ", xhttp.responseText);
-                }
-            };
-            xhttp.open("GET", "GetUserAvailableAccounts", true);
-            xhttp.send();
-
-        });
+        function SetGlobalUserAccounts(result) {
+            globalUserAccounts = result;
+            BindAccounts("To");
+            BindAccounts("From");
+        }
 
         function BindAccounts(FromOrTo) {
 
@@ -173,5 +167,20 @@
                 }
             });
         }
+    </script>
+
+    <script id="docReady" type="text/javascript">
+        var globalUserAccounts;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            AjaxRequest("GET", "GetUserAvailableAccounts", true, "", SetGlobalUserAccounts);
+
+            let btnGetRouteNumber = document.querySelector("#btnRouteNumber");
+            let toAccount = document.querySelector("#toAccountCustom");
+            btnGetRouteNumber.addEventListener("click", () => {
+                AjaxRequest("POST", "ValidateAccount", true, JSON.stringify({ "number": toAccount.value }), ValidAccount, InvalidAccount);
+            });
+
+        });
     </script>
 }

@@ -193,6 +193,12 @@ namespace ATM.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult ValidateAccount(string number)
+        {
+            return ((_bankManager.GetByAccountNumber(number) == null) ? new HttpStatusCodeResult(404) : (ActionResult)Json(number));
+        }
+
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             if (String.IsNullOrEmpty(GetAccountNumber()))
