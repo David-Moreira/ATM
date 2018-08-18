@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ATM.Models.AvailableAccountsViewModel>
+﻿@model ATM.Models.TransferFundsViewModel
 @{ViewBag.Title = "Transfer Funds";}
 <div class="col-xs-12">
     <blockquote>Transfer funds from one account to another. You can type in a routing number of another account that is not in your available accounts. </blockquote>
@@ -21,10 +21,47 @@
 <div class="col-xs-12">
     <blockquote><h6>Click an account number to change to a different account.</h6></blockquote>
 </div>
+@using (@Html.BeginForm("TransferFunds", "Operations", FormMethod.Post, new { id = "form-transferFunds" }))
+{
+
+    <div class="col-xs-12">
+        <h6>Amount to Transfer:</h6>
+        @Html.TextBoxFor(m => m.Amount, "{0:c}", new { @id = "moneyInput", @class = "form-control", @readonly = "readonly" })
+        <div id="pinPad">
+            <table>
+                <tr>
+                    <td><a id="btn1" href="#" class="btn btn-block btn-lg btn-inverse">1</a></td>
+                    <td><a id="btn2" href="#" class="btn btn-block btn-lg btn-inverse">2</a></td>
+                    <td><a id="btn3" href="#" class="btn btn-block btn-lg btn-inverse">3</a></td>
+                    <td><a id="btn4" href="#" class="btn btn-block btn-lg btn-inverse">4</a></td>
+                    <td><a id="btn5" href="#" class="btn btn-block btn-lg btn-inverse">5</a></td>
+                </tr>
+                <tr>
+                    <td><a id="btn6" href="#" class="btn btn-block btn-lg btn-inverse">6</a></td>
+                    <td><a id="btn7" href="#" class="btn btn-block btn-lg btn-inverse">7</a></td>
+                    <td><a id="btn8" href="#" class="btn btn-block btn-lg btn-inverse">8</a></td>
+                    <td><a id="btn9" href="#" class="btn btn-block btn-lg btn-inverse">9</a></td>
+                    <td><a id="btn0" href="#" class="btn btn-block btn-lg btn-inverse">0</a></td>
+                    <td colspan="2"><a id="btnClear" href="#" style="font-size:2.5rem" class="btn btn-block btn-lg btn-default text-uppercase">Clear</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-xs-12">
+        @Html.ValidationSummary(true, "Please verify the following errors:", new { @class = "text-danger" })
+    </div>
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.accountNumber)
+    @Html.HiddenFor(x => x.recipientAccountNumber)
+}
+
 <div class="col-xs-12" style="margin-bottom: 2rem;">
-    <a href="#" class="btn btn-block btn-lg btn-success"><h6><span class="fui-check"></span> Confirm Transfer</h6></a>
+    <a href="javascript:document.querySelector('#form-transferFunds').submit()" class="btn btn-block btn-lg btn-success"><h6><span class="fui-check"></span> Confirm Transfer</h6></a>
 </div>
 
+<!--Modals-->
 <!-- Modal fromAccount -->
 <div class="modal fade" id="fromAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -55,7 +92,6 @@
                 <h4 class="modal-title" id="myModalLabel">Available Accounts</h4>
             </div>
             <div class="modal-body">
-                <!-- Available Accounts -->
                 <p>Input Routing Number</p>
                 <input type="text" id="toAccountCustom" class="form-control" />
                 <button type="button" id="btnRouteNumber" class="btn btn-primary text-uppercase routingButton">Use Routing Number</button>
@@ -63,7 +99,6 @@
 
                 <div id="divToAccounts">
                 </div>
-                <!-- // END Available Accounts -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -84,7 +119,7 @@
 
             let fromAccount = document.querySelector("#mainFromAccount");
             let tempAccHolder = fromAccount.textContent;
-            fromAccount.textContent = accountNumber.textContent;
+            document.querySelector("#accountNumber").value = fromAccount.textContent = accountNumber.textContent;
             accountNumber.textContent = tempAccHolder;
             $(".modal").modal('hide');
             BindAccounts("From");
@@ -100,7 +135,7 @@
 
             let ToAccount = document.querySelector("#mainToAccount");
             let tempAccHolder = ToAccount.textContent;
-            ToAccount.textContent = accountNumber.textContent;
+            document.querySelector("#recipientAccountNumber").value = ToAccount.textContent = accountNumber.textContent;
             accountNumber.textContent = tempAccHolder;
             $(".modal").modal('hide');
             BindAccounts("To");
@@ -180,6 +215,16 @@
             btnGetRouteNumber.addEventListener("click", () => {
                 AjaxRequest("POST", "ValidateAccount", true, JSON.stringify({ "number": toAccount.value }), ValidAccount, InvalidAccount);
             });
+
+            let btnArray = [];
+            let btnClear = document.querySelector("#btnClear");
+            let userInput = document.querySelector("#moneyInput");
+
+            for (let i = 0; i < 10; i++) {
+                document.querySelector("#btn" + i).addEventListener("click", () => userInput.value += i);
+            }
+
+            btnClear.addEventListener("click", () => userInput.value = "");
 
         });
     </script>

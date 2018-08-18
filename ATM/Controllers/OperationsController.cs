@@ -153,7 +153,7 @@ namespace ATM.Controllers
         [HttpGet]
         public ActionResult TransferFunds()
         {
-            return View(GetAvailableAccounts());
+            return View();
         }
 
         [HttpPost]
@@ -161,8 +161,10 @@ namespace ATM.Controllers
         {
             if (ModelState.IsValid)
             {
-                _operationsManager.TransferFunds(GetAccountNumber(), transactionModel.recipientAccountNumber, transactionModel.Amount);
-                return View("Index");
+                var result = _operationsManager.TransferFunds(GetAccountNumber(), transactionModel.recipientAccountNumber, transactionModel.Amount);
+                if (result.Succeeded)
+                    return View("Success");
+                AddErrors(result);
             }
             return View();
         }
@@ -199,6 +201,13 @@ namespace ATM.Controllers
             return ((_bankManager.GetByAccountNumber(number) == null) ? new HttpStatusCodeResult(404) : (ActionResult)Json(number));
         }
 
+        [HttpGet]
+        public ActionResult GetUserAvailableAccounts()
+        {
+            List<AvailableAccountsViewModel> availableAccounts = GetAvailableAccounts();
+            return Json(availableAccounts, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             if (String.IsNullOrEmpty(GetAccountNumber()))
@@ -206,13 +215,6 @@ namespace ATM.Controllers
                 string userID = User.Identity.GetUserId();
                 SetAccountNumber(_bankManager.GetByUserId(userID).AccountNumber);
             }
-        }
-
-        [HttpGet]
-        public ActionResult GetUserAvailableAccounts()
-        {
-            List<AvailableAccountsViewModel> availableAccounts = GetAvailableAccounts();
-            return Json(availableAccounts, JsonRequestBehavior.AllowGet);
         }
 
         private List<AvailableAccountsViewModel> GetAvailableAccounts()
