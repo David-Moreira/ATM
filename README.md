@@ -31,7 +31,7 @@ Improved BL, Better validation and error handling in place instead of just throw
 
 Improvement to TransferFunds functionality.
 
-##As of 18/08/2018 - ToDo
+## As of 18/08/2018 - ToDo
 
 Review the validations and look for edge cases. 
 Log errors into DB or txtFile.
