@@ -26,3 +26,14 @@ Updated design.
 ## 31/07/2018
 
 Improved BL, Better validation and error handling in place instead of just throwing/catching exceptions. Improving operations and design... 
+
+## 18/08/2018
+
+Improvement to TransferFunds functionality.
+
+##As of 18/08/2018 - ToDo
+
+Review the validations and look for edge cases. 
+Log errors into DB or txtFile.
+EF first query is super slow! Figure out an efficient way to warm up EF.
+Either make the app completly responsive to mobile or create a mobile specific interface & interaction.
