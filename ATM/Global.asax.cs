@@ -9,6 +9,7 @@ using ATM.Infrastructure.Repositories;
 using ATM.Models;
 using Ninject;
 using Ninject.Web.Common.WebHost;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -58,6 +59,14 @@ namespace ATM
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
+            EFWarmUp();
+        }
+
+        //Dumb solution for now.
+        private void EFWarmUp()
+        {
+            using (var dbContext = new ATM.Models.ApplicationDbContext())
+            { dbContext.Users.FirstOrDefault(); }
         }
     }
 }
